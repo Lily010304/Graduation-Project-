@@ -1,0 +1,3 @@
+export const COUNTRIES = [
+  'United States','United Kingdom','Canada','Australia','New Zealand','Ireland','Germany','France','Spain','Italy','Netherlands','Belgium','Sweden','Norway','Denmark','Finland','Switzerland','Austria','Poland','Portugal','Greece','Czech Republic','Hungary','Romania','Bulgaria','Turkey','Russia','Ukraine','India','Pakistan','Bangladesh','Sri Lanka','Nepal','China','Japan','South Korea','Vietnam','Thailand','Malaysia','Indonesia','Philippines','Singapore','United Arab Emirates','Saudi Arabia','Qatar','Kuwait','Bahrain','Oman','Jordan','Lebanon','Iraq','Palestine','Egypt','Morocco','Algeria','Tunisia','Libya','Sudan','Somalia','South Africa','Ethiopia','Kenya','Nigeria','Ghana','Brazil','Argentina','Chile','Colombia','Peru','Mexico'
+];

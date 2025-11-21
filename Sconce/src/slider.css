@@ -1,0 +1,54 @@
+/* slider.css archived
+   Original file moved to: ./archive/removed-by-cleanup/src/slider.css
+   This stub keeps build systems from failing if some modules import it.
+*/
+
+/* No-op stub. See archive/removed-by-cleanup/src/slider.css for original styles. */
+/* Slider variant styles (namespaced to avoid global conflicts) */
+* { box-sizing: border-box; }
+html, body, .slider-app-root { height: 100%; }
+body.slider-mode { overflow: hidden; }
+
+.slider-navbar {
+  position: fixed; top: 0; left: 0; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 2rem; z-index: 50;
+  background: rgba(0,0,0,0.35); color: #fff; backdrop-filter: blur(6px);
+  font-family: system-ui, sans-serif;
+}
+.slider-navbar ul { display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+.slider-navbar a { color: #fff; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.5px; }
+.slider-navbar .btn { padding: 0.4rem 0.8rem; border: 1px solid #fff; border-radius: 4px; font-weight: 600; }
+.slider-logo { font-weight: 600; letter-spacing: 0.3rem; font-size: 0.85rem; text-transform: uppercase; }
+
+.slider-container { height: 100vh; width: 100%; position: relative; font-family: system-ui, sans-serif; }
+.slide { height: 100vh; width: 100%; position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; text-align: center; padding: 2rem; opacity: 0; transition: opacity 1s ease; }
+.slide.active { opacity: 1; }
+.slide .content { max-width: 760px; }
+.slide h1, .slide h2 { margin-bottom: 1rem; line-height: 1.15; }
+.slide p, .slide blockquote { line-height: 1.5; }
+
+.hero { background: #000 url('/hero.jpg') center/cover no-repeat; color: #fff; }
+.testimonial { background: #111; color: #f5f5f5; }
+.courses { background: #004aad; color: #fff; }
+.instructor { background: #f4b400; color: #1a1a1a; }
+.contact { background: #222; color: #fff; }
+
+.levels { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; }
+.level { background: rgba(255,255,255,0.15); padding: 0.9rem 1.2rem; border-radius: 10px; font-weight: 500; backdrop-filter: blur(4px); }
+
+.btn { display: inline-block; margin-top: 1rem; padding: 0.8rem 1.2rem; border: none; background: #fff; color: #000; font-weight: 600; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border-radius: 4px; }
+.btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 8px 20px -6px rgba(0,0,0,0.35); }
+.btn:active { transform: translateY(0) scale(0.98); }
+
+form { display: flex; flex-direction: column; gap: 0.8rem; max-width: 320px; margin: 1rem auto 0; }
+form input { padding: 0.65rem 0.9rem; border-radius: 6px; border: 1px solid #ccc; font-size: 0.85rem; }
+form input:focus { outline: 2px solid #fff; outline-offset: 1px; }
+
+@media (max-width: 760px) {
+  .slider-navbar ul { gap: 0.6rem; }
+  .slider-navbar { padding: 0.75rem 1rem; }
+  .slide { padding: 1.5rem; }
+  .slider-logo { letter-spacing: 0.15rem; font-size: 0.75rem; }
+  .btn { font-size: 0.65rem; }
+}
