@@ -336,6 +336,7 @@ export function parseInstructorHash(hash = window.location.hash) {
 	// #/dashboard/instructor                      -> home dashboard
 	// #/dashboard/instructor/courses              -> courses list
 	// #/dashboard/instructor/notebooks            -> AI notebooks
+	// #/dashboard/instructor/notebook/<notebookId> -> single AI notebook detail (new layout)
 	// #/dashboard/instructor/content              -> teaching content overview
 	// #/dashboard/instructor/assessments          -> exams & assignments
 	// #/dashboard/instructor/grading              -> grading workspace
@@ -349,6 +350,10 @@ export function parseInstructorHash(hash = window.location.hash) {
 	const parts = hash.slice(base.length).split('/').filter(Boolean);
 	if (parts.length === 0) return { view: 'home' };
 	if (parts[0] === 'course' && parts[1]) return { view: 'course', courseId: parts[1] };
+	// Notebook detail route (singular)
+	if (parts[0] === 'notebook' && parts[1]) {
+		return { view: 'notebook', notebookId: parts[1] };
+	}
 	const valid = new Set(['courses','notebooks','assessments','grading','messages','performance','payments','schedule']);
 	if (valid.has(parts[0])) return { view: parts[0] };
 	return { view: 'home' };

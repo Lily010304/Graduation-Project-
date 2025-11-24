@@ -97,7 +97,9 @@ export default function InstructorNotebooks() {
         description: `Resources and materials for Week ${weekNumber}`
       });
       setNotebooks([...notebooks, newNotebook]);
-      setView('list');
+      
+      // Navigate to the new notebook immediately
+      window.location.hash = `#/dashboard/instructor/notebook/${newNotebook.id}`;
     } catch (error) {
       console.error('Failed to create notebook:', error);
       alert('Failed to create notebook: ' + error.message);
@@ -105,13 +107,8 @@ export default function InstructorNotebooks() {
   };
 
   const handleSelectNotebook = async (notebookId) => {
-    try {
-      const notebook = await getNotebookWithSources(notebookId);
-      setSelectedNotebook(notebook);
-      setView('detail');
-    } catch (error) {
-      console.error('Failed to load notebook:', error);
-    }
+    // Navigate to NotebookPage using hash router
+    window.location.hash = `#/dashboard/instructor/notebook/${notebookId}`;
   };
 
   if (loading) {
