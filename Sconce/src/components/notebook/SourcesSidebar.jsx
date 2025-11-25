@@ -8,7 +8,7 @@ export default function SourcesSidebar({ notebookId, hasSource }) {
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [contextMenu, setContextMenu] = useState(null);
   const [selectedSource, setSelectedSource] = useState(null);
-  const { sources, isLoading, deleteSource } = useSources(notebookId);
+  const { sources, isLoading, deleteSourceAsync } = useSources(notebookId);
 
   const handleContextMenu = (e, source) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ export default function SourcesSidebar({ notebookId, hasSource }) {
 
   const handleDeleteSource = async (sourceId) => {
     if (window.confirm('Are you sure you want to remove this source?')) {
-      await deleteSource.mutateAsync(sourceId);
+      await deleteSourceAsync(sourceId);
     }
     setContextMenu(null);
   };

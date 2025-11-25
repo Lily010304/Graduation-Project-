@@ -138,8 +138,10 @@ export const useSources = (notebookId) => {
     addSourceAsync: addSource.mutateAsync,
     isAdding: addSource.isPending,
     updateSource: updateSource.mutate,
+    updateSourceAsync: updateSource.mutateAsync,
     isUpdating: updateSource.isPending,
     deleteSource: deleteSource.mutate,
+    deleteSourceAsync: deleteSource.mutateAsync,
     isDeleting: deleteSource.isPending,
   };
 };
