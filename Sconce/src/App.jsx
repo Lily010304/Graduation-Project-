@@ -10,6 +10,7 @@ import InstructorRegister from './components/InstructorRegister.jsx';
 import RegisterChooser from './components/RegisterChooser.jsx';
 import StudentRegister from './components/StudentRegister.jsx';
 import ParentRegister from './components/ParentRegister.jsx';
+import EmailConfirmation from './components/EmailConfirmation.jsx';
 import StudentDashboard from './components/StudentDashboard.jsx';
 import InstructorDashboard from './components/InstructorDashboard.jsx';
 
@@ -27,6 +28,7 @@ function useHashRoute() {
 
 const AppContent = () => {
   const hash = useHashRoute();
+  if (hash.startsWith('#/confirm-email')) return <EmailConfirmation />;
   if (hash.startsWith('#/login')) return <Login />;
   if (hash.startsWith('#/manager')) return <ManagerDashboard />;
   if (hash.startsWith('#/register/instructor')) return <InstructorRegister />;

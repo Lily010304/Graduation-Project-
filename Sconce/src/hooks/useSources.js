@@ -83,6 +83,7 @@ export const useSources = (notebookId) => {
         .insert({
           notebook_id: sourceData.notebookId,
           title: sourceData.title,
+          type: sourceData.type,
           source_type: sourceData.type,
           file_path: sourceData.file_path,
           file_size: sourceData.file_size,
