@@ -4,10 +4,12 @@ import SourcesSidebar from './SourcesSidebar';
 import ChatArea from './ChatArea';
 import StudioSidebar from './StudioSidebar';
 import { useSources } from '../../hooks/useSources';
+import { useNotebook } from '../../hooks/useNotebook';
 
 // notebookId should be passed as prop (from route or parent)
 export default function NotebookPage({ notebookId }) {
   const [selectedCitation, setSelectedCitation] = useState(null);
+  const { notebook } = useNotebook(notebookId);
   const { sources } = useSources(notebookId);
 
   const hasSource = sources && sources.length > 0;
@@ -44,6 +46,7 @@ export default function NotebookPage({ notebookId }) {
         <div className={`${chatWidth} flex-shrink-0`}>
           <ChatArea 
             notebookId={notebookId}
+            notebook={notebook}
             hasSource={hasSource}
             onCitationClick={handleCitationClick}
           />
