@@ -162,18 +162,48 @@ export default function InstructorCourseEditor({ courseId }) {
                   <div className="flex items-center justify-between gap-2">
                     <div className={`text-xs px-2 py-1 rounded-full ${item.hidden ? 'bg-white/10 text-white' : 'bg-white/20 text-white'} capitalize`}>{item.type}</div>
                     <div className="flex items-center gap-2">
+                      {item.type === 'zoom' && item.url && (
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-semibold hover:bg-blue-700 transition-colors"
+                        >
+                          🎥 Start Meeting
+                        </a>
+                      )}
                       <button title="Rename" className="text-xs underline" onClick={()=> onUpdateItem(item, { title: prompt('Edit title', item.title) || item.title })}>Rename</button>
                       <button title="Edit description" className="text-xs underline" onClick={()=> onUpdateItem(item, { description: prompt('Edit description', item.description || '') || item.description })}>Description</button>
-                      {item.url !== undefined && <button title="Edit URL" className="text-xs underline" onClick={()=> onUpdateItem(item, { url: prompt('Edit URL', item.url || '') || item.url })}>Link</button>}
+                      {item.url !== undefined && item.type !== 'zoom' && <button title="Edit URL" className="text-xs underline" onClick={()=> onUpdateItem(item, { url: prompt('Edit URL', item.url || '') || item.url })}>Link</button>}
                       <button title={item.hidden ? 'Show item' : 'Hide item'} className="text-xs" onClick={()=> onUpdateItem(item, { hidden: !item.hidden })}>{item.hidden ? '👁️‍🗨️' : '👁️'}</button>
                       <button title="Delete item" className="text-xs" onClick={()=> onRemoveItem(item)}>🗑️</button>
                     </div>
                   </div>
                   <div className={`mt-1 font-semibold ${item.hidden ? 'line-through text-white/70' : ''}`}>{item.title}</div>
                   {item.description && <div className={`text-sm ${item.hidden ? 'text-white/70 line-through' : 'text-white'}`}>{item.description}</div>}
+                  {item.type === 'zoom' && item.zoomData && (
+                    <div className="mt-2 text-xs bg-white/10 rounded-lg p-2 space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-white/70">📅 Start:</span>
+                        <span className="text-white">{new Date(item.zoomData.startTime).toLocaleString()}</span>
+                      </div>
+                      {item.zoomData.meetingId && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-white/70">🔢 Meeting ID:</span>
+                          <span className="text-white font-mono">{item.zoomData.meetingId}</span>
+                        </div>
+                      )}
+                      {item.zoomData.password && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-white/70">🔒 Password:</span>
+                          <span className="text-white font-mono">{item.zoomData.password}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <div className="text-[11px] text-white/90">
                     {item.durationMins ? `${item.durationMins} mins` : null}
-                    {item.url ? ` • ${item.url}` : null}
+                    {item.url && item.type !== 'zoom' ? ` • ${item.url}` : null}
                   </div>
                 </div>
               ))}
