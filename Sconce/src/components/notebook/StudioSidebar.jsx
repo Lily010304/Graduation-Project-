@@ -118,13 +118,15 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
             </div>
           ) : notes && notes.length > 0 ? (
             <div className="space-y-3">
-              {notes.map(note => (
+              {notes.map((note, index) => (
                 <div 
                   key={note.id} 
                   onClick={() => setSelectedNote(note)}
                   className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white transition-colors"
                 >
-                  <h4 className="font-medium text-gray-900 truncate">{note.title}</h4>
+                  <h4 className="font-medium text-gray-900 truncate">
+                    {note.title === 'AI-Generated Summary' ? `Summary ${notes.length - index}` : note.title}
+                  </h4>
                   <p className="text-sm text-gray-600 line-clamp-2 mt-1">
                     {note.content}
                   </p>
