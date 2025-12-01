@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 
 export function useNotes(notebookId) {
@@ -19,6 +20,54 @@ export function useNotes(notebookId) {
     },
     enabled: !!notebookId,
   });
+
+  // Real-time subscription for notes updates
+  useEffect(() => {
+    if (!notebookId) return;
+
+    const channel = supabase
+      .channel('notes-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'notes',
+          filter: `notebook_id=eq.${notebookId}`
+        },
+        (payload) => {
+          console.log('Real-time note update:', payload);
+          
+          queryClient.setQueryData(['notes', notebookId], (oldNotes = []) => {
+            switch (payload.eventType) {
+              case 'INSERT':
+                const newNote = payload.new;
+                const exists = oldNotes.some(n => n.id === newNote?.id);
+                if (exists) return oldNotes;
+                return [newNote, ...oldNotes];
+                
+              case 'UPDATE':
+                const updated = payload.new;
+                return oldNotes.map(n => 
+                  n.id === updated?.id ? updated : n
+                );
+                
+              case 'DELETE':
+                const deleted = payload.old;
+                return oldNotes.filter(n => n.id !== deleted?.id);
+                
+              default:
+                return oldNotes;
+            }
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [notebookId, queryClient]);
 
   const createNoteMutation = useMutation({
     mutationFn: async ({ title, content, source_type = 'user' }) => {

@@ -16,31 +16,30 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
   const handleGenerateSummary = async () => {
     if (!notebookId || !hasProcessedSource) return;
     setLoading(true);
+    
     try {
       const SUPABASE_URL = 'https://yuopifjsxagpqcywgddi.supabase.co';
       const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
       
-      const response = await fetch(`${SUPABASE_URL}/functions/v1/generate-summary`, {
+      // Fire and forget - don't wait for the workflow to complete
+      fetch(`${SUPABASE_URL}/functions/v1/generate-summary`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
         },
         body: JSON.stringify({ notebook_id: notebookId })
+      }).catch(e => {
+        console.error('Failed to trigger summary generation', e);
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to generate summary');
-      }
-
-      const result = await response.json();
-      console.log('Summary generated:', result);
+      // Show success message immediately
+      const sourceCount = sources?.filter(s => s.processing_status === 'completed').length || 0;
+      alert(`Summary generation started for ${sourceCount} source${sourceCount !== 1 ? 's' : ''}!\n\nThis may take several minutes depending on the content size.\nThe summary will automatically appear in your notes when ready.`);
       
-      // Refetch notes to show the new summary
-      await refetch();
     } catch (e) {
       console.error('Failed to generate summary', e);
-      alert('Failed to generate summary. Please try again.');
+      alert('Failed to start summary generation. Please try again.');
     } finally {
       setLoading(false);
     }
