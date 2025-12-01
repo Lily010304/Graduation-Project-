@@ -211,7 +211,7 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
               <div className="mb-6 space-y-4">
                 {messages.map((msg) => (
                   <div key={msg.id} className={`flex ${isUserMessage(msg) ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`${isUserMessage(msg) ? 'max-w-xs lg:max-w-md px-4 py-2 bg-blue-500 text-white rounded-lg' : 'w-full'}`}>
+                    <div className={`${isUserMessage(msg) ? 'max-w-xs lg:max-w-md px-4 py-2 bg-[#034242] text-white rounded-lg' : 'w-full'}`}>
                       <div className={isUserMessage(msg) ? '' : 'text-gray-800'}>
                         <MessageRenderer 
                           content={msg.message.content} 
@@ -225,7 +225,7 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
 
                 {pendingUserMessage && !messages.some(m => isUserMessage(m) && m.message.content === pendingUserMessage) && (
                   <div className="flex justify-end">
-                    <div className="max-w-xs lg:max-w-md px-4 py-2 bg-blue-500 text-white rounded-lg">
+                    <div className="max-w-xs lg:max-w-md px-4 py-2 bg-[#034242] text-white rounded-lg">
                       {pendingUserMessage}
                     </div>
                   </div>
@@ -267,7 +267,7 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
             <button
               onClick={() => handleSend()}
               disabled={!message.trim() || isChatDisabled || isSending || !!pendingUserMessage || isSendingMessage}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-[#58ACA9] text-white rounded-md hover:bg-[#58ACA9]/90 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
             >
               {isSending || pendingUserMessage || isSendingMessage ? (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

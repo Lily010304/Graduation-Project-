@@ -35,7 +35,7 @@ export default function NotebookPage({ notebookId }) {
   const studioWidth = 'w-[30%]';
 
   return (
-    <div className="h-full bg-white flex flex-col overflow-hidden">
+    <div className="h-full bg-white flex flex-col">
       <NotebookHeader notebookId={notebookId} />
 
       <div className="flex-1 flex overflow-hidden">

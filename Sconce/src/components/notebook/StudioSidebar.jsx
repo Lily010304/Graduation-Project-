@@ -46,33 +46,33 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
   };
 
   return (
-    <div className="w-full bg-gray-50 border-l border-gray-200 flex flex-col h-full overflow-hidden">
-      <div className="p-4 border-b border-gray-200 flex-shrink-0">
+    <div className="w-full bg-[#034242] border-l border-[#034242]/20 flex flex-col h-full overflow-hidden">
+      <div className="p-4 border-b border-white/10 flex-shrink-0">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-medium text-gray-900">Studio</h2>
+          <h2 className="text-lg font-medium text-white">Studio</h2>
           <button
             onClick={onToggle}
-            className="p-1.5 hover:bg-gray-200 rounded-lg transition-colors"
+            className="p-1.5 hover:bg-white/10 rounded-lg transition-colors"
             title="Toggle sidebar"
           >
-            <ChevronRight className="h-5 w-5 text-gray-600" />
+            <ChevronRight className="h-5 w-5 text-white" />
           </button>
         </div>
         
         {/* Summarizer Card */}
-        <div className="p-4 mb-4 border border-gray-200 rounded-lg bg-white">
+        <div className="p-4 mb-4 border border-white/10 rounded-lg bg-white/5">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-medium text-gray-900">Summarizer</h3>
+            <h3 className="font-medium text-white">Summarizer</h3>
           </div>
 
-          <div className="p-3 border border-gray-200 rounded-lg">
+          <div className="p-3 border border-white/10 rounded-lg">
             <div className="flex items-center space-x-3 mb-3">
-              <div className="w-8 h-8 rounded flex items-center justify-center bg-blue-50">
-                <FileText className="h-5 w-5 text-blue-600" />
+              <div className="w-8 h-8 rounded flex items-center justify-center bg-white/10">
+                <FileText className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1">
-                <h4 className="font-medium text-gray-900">AI Summary</h4>
-                <p className="text-sm text-gray-600">Generate comprehensive summary</p>
+                <h4 className="font-medium text-white">AI Summary</h4>
+                <p className="text-sm text-white/70">Generate comprehensive summary</p>
               </div>
             </div>
             
@@ -80,7 +80,7 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
               <button 
                 onClick={handleGenerateSummary}
                 disabled={loading || !hasProcessedSource}
-                className="flex-1 px-4 py-2 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex-1 px-4 py-2 text-sm text-white bg-[#58ACA9] hover:bg-[#58ACA9]/90 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {loading ? (
                   <span className="flex items-center justify-center">
@@ -98,10 +98,10 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
         {/* Notes Section */}
         <div className="mb-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-medium text-gray-900">Notes</h3>
+            <h3 className="font-medium text-white">Notes</h3>
           </div>
           
-          <button className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md hover:bg-gray-100 flex items-center justify-center">
+          <button className="w-full px-3 py-2 text-sm border border-white/20 rounded-md hover:bg-white/10 flex items-center justify-center text-white">
             <Plus className="h-4 w-4 mr-2" />
             Add note
           </button>
@@ -113,7 +113,7 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
         <div className="p-4">
           {isLoading ? (
             <div className="text-center py-8">
-              <p className="text-sm text-gray-600">Loading notes...</p>
+              <p className="text-sm text-white/70">Loading notes...</p>
             </div>
           ) : notes && notes.length > 0 ? (
             <div className="space-y-3">
@@ -121,13 +121,13 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
                 <div 
                   key={note.id} 
                   onClick={() => setSelectedNote(note)}
-                  className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white transition-colors"
+                  className="p-3 border border-white/10 rounded-lg hover:bg-white/5 cursor-pointer bg-white/5 transition-colors"
                 >
-                  <h4 className="font-medium text-gray-900 truncate">{note.title}</h4>
-                  <p className="text-sm text-gray-600 line-clamp-2 mt-1">
+                  <h4 className="font-medium text-white truncate">{note.title}</h4>
+                  <p className="text-sm text-white/70 line-clamp-2 mt-1">
                     {note.content}
                   </p>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-white/50 mt-2">
                     {new Date(note.updated_at).toLocaleDateString()}
                   </p>
                 </div>
@@ -135,11 +135,11 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
             </div>
           ) : (
             <div className="text-center py-8">
-              <div className="w-16 h-16 bg-gray-200 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                <span className="text-gray-400 text-2xl">📄</span>
+              <div className="w-16 h-16 bg-white/10 rounded-lg mx-auto mb-4 flex items-center justify-center">
+                <span className="text-white/40 text-2xl">📄</span>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Saved notes will appear here</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className="text-lg font-medium text-white mb-2">Saved notes will appear here</h3>
+              <p className="text-sm text-white/70">
                 Save a chat message to create a new note, or click Add note above.
               </p>
             </div>

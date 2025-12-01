@@ -39,7 +39,7 @@ export default function InstructorDashboard() {
       {route.view === 'course' && <InstructorCourseEditor courseId={route.courseId} />}
       {route.view === 'assessments' && <ExamsBuilder />}
       {route.view === 'notebooks' && <InstructorNotebooks />}
-      {route.view === 'notebook' && <div className="fixed inset-0 top-[6rem] left-[240px] right-0 bottom-0 bg-white"><NotebookPage notebookId={route.notebookId} /></div>}
+      {route.view === 'notebook' && <div className="h-full overflow-hidden bg-white"><NotebookPage notebookId={route.notebookId} /></div>}
       {route.view === 'grading' && <InstructorGradingPage />}
       {route.view === 'messages' && <InstructorMessagesPage />}
       {route.view === 'performance' && <InstructorPerformancePage />}
