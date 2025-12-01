@@ -4,7 +4,7 @@ import { supabase } from '../lib/supabase';
 export function useNotes(notebookId) {
   const queryClient = useQueryClient();
 
-  const { data: notes, isLoading, error } = useQuery({
+  const { data: notes, isLoading, error, refetch } = useQuery({
     queryKey: ['notes', notebookId],
     queryFn: async () => {
       if (!notebookId) return [];
@@ -77,6 +77,7 @@ export function useNotes(notebookId) {
     notes,
     isLoading,
     error,
+    refetch,
     createNote: createNoteMutation.mutate,
     updateNote: updateNoteMutation.mutate,
     deleteNote: deleteNoteMutation.mutate,

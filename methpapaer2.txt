@@ -1,0 +1,784 @@
+Creative Education, 2019, 10, 766-783
+http://www.scirp.org/journal/ce
+ISSN Online: 2151-4771
+ISSN Print: 2151-4755
+
+PhD Thesis Writing Process: A Systematic
+Approach—How to Write Your Methodology,
+Results and Conclusion
+Qais Faryadi
+Future Expert Solutions, Creative Research and Innovations, Kuala Lumpur, Malaysia
+
+How to cite this paper: Faryadi, Q. (2019).
+PhD Thesis Writing Process: A Systematic
+Approach—How to Write Your Methodology, Results and Conclusion. Creative
+Education, 10, 766-783.
+https://doi.org/10.4236/ce.2019.104057
+Received: March 22, 2019
+Accepted: April 23, 2019
+Published: April 26, 2019
+Copyright © 2019 by author(s) and
+Scientific Research Publishing Inc.
+This work is licensed under the Creative
+Commons Attribution International
+License (CC BY 4.0).
+http://creativecommons.org/licenses/by/4.0/
+Open Access
+
+Abstract
+I have already discussed the PhD introduction and literature review in detail.
+In this paper, I discuss the PhD methodology, results and how to write a
+stunning conclusion for your thesis. The main objective of this paper is to
+help PhD candidates to understand what is a PhD methodology and guide
+them in writing a systematic and meaningful PhD methodology, results and
+conclusion. The methodology used in this research is a descriptive method as
+it deliberates and defines the various parts of PhD methodology, results and
+conclusion writing process and elucidates the “how to do” in a very unpretentious and understanding manner. As thus, this paper summarises the various steps of thesis methodology, results and conclusion writing to pilot the
+PhD students. This road map is a useful guidance especially for students of
+social science studies. Additionally, in this paper, methodology writing techniques, procedures and important strategies are enlightened in a simple
+manner. This paper adopts a “how-to approach” when discussing a variety of
+relevant topics such as introduction, formulation of the methodology, variables, research design process, types of sampling, data collection process,
+interviews, questionnaires, data analysis techniques and so on. Results and
+conclusions are also discussed in detail, so that PhD candidates can follow the
+guide clearly. This paper has 5 parts such as Introduction, Literature reviews,
+Methodology, Results and Conclusion. As such, I discuss Methodology, Results and Conclusion as the final assessment of the PhD thesis writing
+process.
+
+Keywords
+Thesis Writing Process, PhD, Social Science, Research Methodology,
+Results, Conclusion
+
+DOI: 10.4236/ce.2019.104057 Apr. 26, 2019
+
+766
+
+Creative Education
+
+Q. Faryadi
+
+1. The PhD Research Process
+1.1. Introduction
+Once you have identified a research problem that you wish to investigate, you
+must validate your research problem by doing a thorough investigation of documented literature. This section I have already discussed in the previous publication. Next, the question that should come to your mind is: HOW am I going
+
+to conduct my research so that I can resolve the problem? You should also ask
+WHY you want to make the investigation. What is the theoretical basis for investigating the research problem? You need to plan a research design and a
+roadmap so that you can proceed with your study scientifically. The most important section of your research design is the methodology. As a researcher, you
+need to distinguish between methodology and method. Methodology refers to
+the theoretical analysis of your research while method refers to a systematic and
+orderly arrangement and measurement of your research. Different studies require different methodologies.
+For example, in a research on human feelings, the methodology used might be
+Triangulation, i.e. a mixture of qualitative, quantitative, and descriptive studies.
+The method described in such a study would refer to the research design, population sample, test instrument, the determination of validity, reliability of results
+and so on. Understanding the research terminologies is crucial in order to comprehend the meaning of research and their applications so that the PhD candidates conduct their investigations successfully. The followings are some useful
+and selected terminologies and their meanings:
+Variables: When something is a variable, it is not consistent but is prone to
+change, for example, age, height, weight, and income. These attributes take different values among people. When conducting your research, you must understand and measure your variables that can bring changes in your experimental
+investigation. “Whether we accept it or not, we all make value judgements con-
+
+stantly in our daily lives: ‘This food is excellent’; ‘I could not sleep well last
+night’; ‘I do not like this’; and ‘I think this is wonderful’. These are all judgements based upon our own preferences, indicators or assessment. Because these
+explain feelings or preferences, the basis on which they are made may vary markedly from person to person. There is no uniform yardstick with which to
+measure them. A food may be judged ‘excellent’ by one person but ‘awful’ by
+another, and something else could be wonderful to one person but ugly to
+another.
+When people express these feelings or preferences, they do so because of certain criteria in their minds, or in relation to their expectations. If you were to
+question them, you will discover that their judgement is based upon indicators
+and/or expectations that lead them to conclude and express a particular opinion.
+‘An image, perception or concept that is capable of measurement—hence capable of taking on different values is called a variable. In other words, a concept
+that can be measured is called a variable.’ A variable is a property that takes on
+DOI: 10.4236/ce.2019.104057
+
+767
+
+Creative Education
+
+Q. Faryadi
+
+different values. Putting it redundantly, a variable is something that varies.’ A
+variable is a symbol to which numerals or values are attached.” (Ranjit, 2011).
+Dependent and independent variables: These are tested in the experimental
+field. Whatever changes happen to a dependent variable, it is because of an independent variable. For instance, you want to develop a multimedia learning
+courseware, and you want to test its effectiveness in your class. You notice
+changes to your students’ level of knowledge (dependent variable) after using the
+learning software (independent variable). Your students’ varying levels of knowledge are dependent variables. In layman language, it is cause and effect. A
+change or a cause is an independent variable while its outcome or effects are the
+dependent variables.
+Causation: When you are investigating, you will notice changes in your sample or subject before and after an experiment. For instance, if it is found that absentee students form the largest group of failures, we can conclude that absenteeism is the cause of failure.
+Correlation: This refers to a relationship between two variables. You want to
+measure the variable that is the cause of a change. Once you notice a change in
+one variable, then you can presume how another will change. For instance, you
+note that hard working students always pass their exams with flying colours. On
+the other hand, those who are not hard working always perform badly in their
+exams. There is thus a positive correlation between hard work and success.
+Pre-test: In research when you want to make an experimental study, you have
+two groups of students. To know their actual and existing knowledge, you
+should administer a preliminary test to determine their base knowledge (before
+experiment).
+Post-test: This test is administered to students after completion of an experiment to evaluate their achievement (after experiment).
+Random sample: When you need a certain number of participants for a survey or experimental study, opting for a random sampling implies that all members of the target population have an equal chance of being selected.
+Validity and reliability: These are two well-known concepts to evaluate the
+quality of your experimental research. Your study is considered reliable when
+other researchers repeat it and obtain similar results. Validity ensures that your
+instrument has validity (the instrument should measure what it is supposed to
+measure).
+Sampling: You must decide how to select a small but representative portion
+of the target population.
+Triangulation: This method mixes three methodologies, viz. qualitative,
+quantitative, and observation. It is vital to choose a methodology that is appropriate for your research. Qualitative method is used to collect and analyse data
+while quantitative method can be used to further strengthen the qualitative data.
+Research shows that quantitative data reinforces qualitative data. According to
+Thompson (2004), in research, it is better to use both eyes rather than one.
+Research further indicates that qualitative methodology is very naturalistic
+DOI: 10.4236/ce.2019.104057
+
+768
+
+Creative Education
+
+Q. Faryadi
+
+and conducted in real time with the investigator in control (Bogdan & Biklen,
+2003; Golafshani, 2003; Hoepfi, 1997). Studies have also indicated that a mixed
+methodology design leads the researcher to understand the research problem
+better (Hanson et al., 2005). Furthermore, researchers utilize qualitative and
+quantitative research methods to evaluate their research questions. In Observation method, you observe your sample and listen to their conversations. Observation can also be conducted through recording, such as narrative and categorical recording of the participants’ oral discourse.
+
+1.2. Useful Tipsin Writing Your Research Methodology
+Choose your methodology based on the type of research you are conducting. Institute a clear affiliation between your study and your methodology. Ask yourself
+whether this methodology will facilitate finding answers to your research questions. Provide meaningful reasons for choosing your methodology e.g. following
+the footsteps of previous researchers in related studies. Make sure your method
+includes research design, sample population, test instrument, validity, reliability
+and implementation phases. Most importantly, are you comfortable with the research methodology that you have chosen?
+As evident from the above discussion, there are many types of research methodologies when conducting a scholarly investigation. Here I will explain the
+commonly used methods in social science. When conducting a research, two issues must be considered: Firstly, counting and measuring (Quantitative) and
+secondly, discussion (Qualitative) with people. These two methods of doing research are vital in social science research (MacDonald & Headlam, 2014):
+1) Quantitative Method: This method of investigation systematically views
+the population numerically and quantifies the data in percentages in relation to
+the whole. Participants’ responses in questionnaires are accorded scores. The
+data are then analysed and interpreted statistically. This method makes it easier
+for other researchers to repeat your experiment or study to test its reliability.
+2) Qualitative Method: It deals with contextualization, interpretation, understanding and perspectives of respondents. This method investigates the quality
+of information and data. It is aimed at collecting information on people’s views
+and perceptions through interviews and surveys. As such, the qualitative method
+is subjective, the outcome depending on the respondents’ feelings, views and
+perceptions. Hence, the researcher using this method of investigation has to
+have scholarly judgement and interpretation. The investigation in the qualitative
+method is descriptive, so you cannot predict.
+It is based on face to face interviews as well as phone interviews, group discussions, behavioural related enquiries, observations, and video conferencing. Using
+various ways to collect data, the qualitative method can contribute meaningful
+and accurate information.
+
+2. The Significance of This Research
+Writing methodology for your PhD thesis requires exceptional skill that every
+DOI: 10.4236/ce.2019.104057
+
+769
+
+Creative Education
+
+Q. Faryadi
+
+PhD candidate must take note. Unfortunately, majority of the PhD candidates
+find it difficult to finish their thesis on time because of confusion and lake of expertise in writing the methodology for their research. Most of them in deed do
+not know how to write the methodology correctly, scientifically and how to analyse them properly. As thus, this investigation is truly helpful for the PhD candidates in particular and for the researchers in general.
+
+3. Objectives
+1) To assist PhD candidates to understand what is methodology all about.
+2) To describe correct methodology writing process.
+3) To help PhD candidates and researchers to write their methodology and
+results academically and scholarly.
+
+4. The PhD Thesis Process
+I have already discussed PhD thesis problem statement, introduction, objectives
+and literature review in the previous publications. In this chapter, I would like to
+explain and provide a useful road map on the “How to Do” of PhD thesis research Methodology, research result and research conclusion.
+
+4.1. Research Methodology
+The methodology applied in this research was descriptive as it discusses and describes the various parts of methodology writing process and explains the how to
+do of them in a very simple and understanding language (Faryadi, 2018). Descriptive analysis is applied to explain the basic features of thesis writing process
+(García & Fombona, 2015). Descriptive method is very useful in providing basic
+summaries of the chapters (Al-Raqqad et al., 2017). The followings are the
+process of PhD thesis writing process (parts of methodology).
+
+4.2. Research Design Process
+Research design refers to the way you establish a road map to conduct your research. What type of strategy will you adopt to integrate all the parts of your investigation? Your research design dictates the type of data you need to collect,
+what methods and methodology to apply, and how you will analyse your data to
+answer your research questions. It is all about the organization and structure of
+your study. You need to decide on the type of design you will use, such as experimental, descriptive, exploratory and so on. In other words, your research design is the outline of your study.
+Although research designs may differ from one discipline to another, a general road map should include the following:
+1) Topic of research
+2) Research problem, questions and hypotheses
+3) Review of current literature
+4) Theoretical framework or methodology
+5) Data collection and testing if any
+DOI: 10.4236/ce.2019.104057
+
+770
+
+Creative Education
+
+Q. Faryadi
+
+6) Data analysis
+7) Results
+
+4.3. Population and Sampling
+When you wish to conduct an investigative study, it is vital to identify the target
+population and the size of your sampling. Sampling means that you take an appropriate portion of your population that can represent your population without
+bias. A good sampling indicates that you have selected an adequate number that
+is representative of the target population statistically so that you can make informed conclusions about your results based on the collected data. It is sometimes thought that the larger the sample, the better the results and more accurate
+the outcome. However, this may not necessarily be true. In research, one must
+contend with likelihood and probabilities. Statistics will determine how accurate
+your sample is in representing the target population. Statistics will indicate how
+likely you can get more accurate results by growing the size of your sample.
+There are times that you should stop searching for more answers. We should
+avoid wasting time and resources unnecessarily trying to measure a huge sample
+of the target population. Indeed, a very large sample is not as important as your
+research questions and questionnaires in your search for answers. A huge sample
+cannot convert your bad data into good ones. In fact, the use of appropriate statistical software will dictate how much is too much. Remember, less is more. You
+can get a reliable statistician to help you. Most social science researchers use
+SPSS (Statistical Package for the Social Sciences) as it is considered one of the
+best statistics software currently in use (Gordon & Petre, 2010).
+
+4.4. How Do You Calculate Samples?
+When you want to take an appropriate sample from a large target population, it
+is advisable to follow the following procedures: Let’s say you want to know the
+average age of your target population. Obviously, you don’t want to ask everyone
+his or her age. You want only the average age from a sample of the target population. Hence, you choose some of your participants, let’s say 6 out of 15 students from your class. Now you do a simple calculation: Ask your 6 students
+about their ages and then add all their ages, divide them by your sample size, i.e.
+6. You will get the average or the mean of your population in the class. Take note
+that the objective of selecting an appropriate sample is to make sure that you are
+selecting a sample that is as representative as possible to the rest of the target
+population. In research, always avoid human errors such as bias and discrimination. One of the difficulties of sampling is deciding on the sample size. If you
+have too small sample, the probability of error is high; if you have a large sample
+size from your population, you may assume erroneously that your findings are
+much more accurate.
+
+4.5. Types of Sampling
+Random Sampling: It is a type of sampling that implies every member of the
+DOI: 10.4236/ce.2019.104057
+
+771
+
+Creative Education
+
+Q. Faryadi
+
+population has an equal chance of being part of the study. It is vital that the selection is based on the probability that each member of the population is independent and free from bias and individual preferences. The sample must not
+only be representative of the target population but also be selected without any
+discrimination. For example, you are interested to know why, in your class of
+100 students, more than 65 failed in their final exam. Unfortunately, 20 students
+refused to participate in your investigation. Now you have a population of 80
+students to study. Whatever sample you take from the remaining 80 students,
+therefore, is not valid as it does not represent the whole population equally. This
+type of sampling is not representative of the whole population.
+However, if the percentage of non-participation is not sufficiently large in relation to the whole population, then the sampling can be considered fairly representative.
+Let’s discuss how you can have your random sample from the target population of 100 students. Let me illustrate with a simple example. Write each name
+on a separate piece of paper and insert it inside a box. Then select one by one
+without looking till you have your desired sample size. You would notice that
+logically all the 100 students could have an equal chance of being selected. Thus,
+your selection would represent the whole population without discrimination.
+Non-random Sampling: This type of sampling, as the phrase suggests, does
+not fall into the categories of probability and random selection. Random sampling is done because there is a problem in the selection of participants from the
+target population. It could be due to the fact that the total number of your population is either unknown or too large to be sampled individually. The following
+methods are useful for taking your desired samples:
+Quota Sampling: Let’s say you want to study a specific characteristic of the
+target population. You need to select a sample for your research. It is done at
+your own timing and liking. Look for those who have the characteristic and keep
+on selecting until you are satisfied with quantity. Let’s take an example of quota
+sampling. You want to know the age of male teachers in a school. You stand at
+the gate entrance and when any male teacher enters you ask him for his age until
+you are satisfied with the number. This type of sampling is the most convenient
+and least expensive. However, the disadvantage of this sampling is that the result
+may not be based on probability and cannot be generalized to the whole population.
+Accidental Sampling: This type of sampling is similar to quota sampling but
+without a selected predetermined characteristic that is obvious or visible.
+Purposive Sampling: This sampling is based on personal preference and
+judgment. You select only participants who you think will provide you with the
+kind of information you need. So, it is based on the researcher’s opinion and decision.
+Expert Sampling: You select only the experts. You know that such participants or respondents are knowledgeable and will give you the information you
+require.
+DOI: 10.4236/ce.2019.104057
+
+772
+
+Creative Education
+
+Q. Faryadi
+
+Snow Ball Sampling: In such an exercise, you first select a few individuals of
+the target population. After they have provided you with the necessary information, ask them to suggest suitable people to participate in a similar interview or
+survey.
+Mixed Sampling: This type of research sampling uses a mixture of random
+and non-random sampling principles.
+As apparent from the above discussion, it is important to decide on the size of
+your sampling. Once you have decided, just proceed to collect the necessary data. Take note that in a qualitative study, you pay less attention to the sample size,
+while in quantitative research, it is important to have an appropriate sample size
+in relation to the target population.
+
+4.6. Data Collection Process
+Data collection in research is a long process of gathering, measuring and establishing meaning so that you have answers to your questions. It is useful to have a
+systematic road map for gathering relevant and current data to answer your hypotheses and research questions. Before proceeding with data collection, there
+are some questions you need to ask yourself.
+For instance: What kind of data do I need? How am I going to collect the necessary information?
+The following are some useful guidelines:
+1) Choose an appropriate instrument for a meaningful outcome. The researcher should investigate ways of collecting relevant information. It requires
+reading, talking with peers, reviewing related literature to see how other scholars
+have conducted their data collection. It is crucial to understand theoretical concepts on data collection. As such, you should have a clear vision of your research
+so that the data collected will meet the objectives of your study.
+2) Ensure that the instrument has validity (the instrument should measure
+what it is supposed to measure) and reliability (it is accurate and consistent in
+measuring your variables).
+3) Your instrument should not have any bias. It is the duty of the researcher to
+make sure that the respondents are not under pressure to provide information.
+
+4.7. Data Collection
+4.7.1. Primary Data Collection
+If the information collected is from original research that is documented in international journals, proceedings and theses, the data source is considered primary. The data is from first-hand work that is peer-reviewed, indexed, and published for the first time. Primary data also refers to your collection of information directly from your sample population. For instance, you wish to investigate
+the effectiveness of university lecturers. You go to the field to investigate the job
+satisfaction of lecturers, students’ perception of the quality of teaching, and so
+on. Take note that effective primary data collection depends on your purpose,
+professional skills, and your resources. Collecting the wrong data would invariaDOI: 10.4236/ce.2019.104057
+
+773
+
+Creative Education
+
+Q. Faryadi
+
+bly yield inaccurate results. Hence before commencing your data collection,
+make sure that you study the background of the target population, such as demographic characteristics, socioeconomic, educational level, their age group,
+gender and so on.
+4.7.2. Research Instruments for Gathering Primary Data
+1) Questionnaire Design
+It is vital to construct a questionnaire that will yield vital information for your
+study. The structure of a questionnaire, like writing an essay, requires an introduction, main issue, and a conclusion. It is a good idea to begin your questionnaire with an introduction that explains your topic and purpose, as well as a
+brief introduction of yourself, the researcher.
+Write your introduction politely, indicating that participation is not compulsory and only takes about 5 minutes. Always indicate clearly in your introduction that respondents’ answers are strictly confidential. This will ensure that
+your respondents would feel comfortable giving their feedback or personal information. At the end of your questionnaire, do not forget to express your gratitude and thanks. When designing your questionnaire, make sure that your questions are theoretically sound and field-tested so the validity and reliability of
+your instrument will not be questioned. Once your questionnaire is ready, you
+can administer it via the post, telephone, email/internet or self-administered
+surveys.
+2) Types of Questions
+Open-ended Questions: This cannot be answered by a simple yes or no; it
+requires elaboration.
+Ranking Scales: Participants’ responses to selected statements are given
+ranking. The ranking scale is normally based on comparison, e.g. No 1 is the
+lowest and No 10 is the highest.
+Sliding Scales: Such questions aim to record the respondent’s attitude and
+feelings toward a given situation or product. For example, the respondent is
+asked to indicate his degree of agreement or disagreement with a given statement.
+Multiple-choice Questions: The participant responds by choosing one of the
+several options.
+Dichotomous Questions: The participant responds by choosing either
+
+Yes/No or True/False.
+4.7.3. Primary Data Collection Methods
+Field notes: when you conduct an experimental study, you should have a
+note-taking habit of what you observe happening in the field. Observation: This
+is one of most effective ways of collecting primary data for your research. You
+observe your sample and listen to their conversations. Observation can also be
+conducted through recording, such as narrative and categorical recording of the
+participants’ oral discourse.
+DOI: 10.4236/ce.2019.104057
+
+774
+
+Creative Education
+
+Q. Faryadi
+
+There are two types of observations, namely participants’ observation and
+non-participants’ observation. In participants’ observation, the researcher directly participates with the sample population and observes the situation. It can
+be done secretly or with their knowledge. For instance, if you want to know the
+progress of an English class in your university, you could pretend to be a student
+in that class to know exactly what is happening.
+In non-participants’ observation, you are not involved in any activity; you
+just watch and listen to the conversation of a selected sample and take notes. It
+must be pointed out that research observation has its disadvantages and may
+lead to a wrong conclusion. If your participants know that you are observing
+them, they may change their behaviour and thus the data collected may not be
+totally accurate. Furthermore, the element of bias may cloud the observer’s interpretation or judgment of the situation.
+Interview: Another popular method of collecting data is through interviews.
+After you have chosen your sample, conduct an interview with the participants
+and record the session for viewing later. The interview can be conducted face to
+face or via the phone. One of the advantages of an interview is that you have the
+freedom of asking any question (in an unstructured interview). Interviews are
+conducted in a friendly manner. It is the duty of the researcher to make the session interesting and motivating so that the respondents would feel at ease when
+talking.
+1) Types of Interviews
+Structured Interview: In a structured interview, the questions are structured
+and already designed ahead of the interview. This type of interview can be conducted either face to face or by phone. One of the benefits of a structured interview is that the collected data is uniform, and comparability of the data is assured. Furthermore, it does not require a skillful researcher to conduct the interview.
+Unstructured Interview: This is a less formal interview. The researcher has
+complete freedom with regard to the content, wording, and the manner of asking questions. Unstructured interviews are common in qualitative and quantitative methods of data collection.
+Questionnaires: Another method of collecting information to answer your
+research questions is by distributing questionnaires to your sample population.
+What is a questionnaire? It is a uniform set of written questions to gather information from the respondents. It is the duty of the researcher to ensure that the
+questions are clear, simple, easy to understand, and does not take up too much
+time or thinking to answer. Questionnaires are distributed in many ways, such
+as through e-mail, phone conversation, public places and so on. One of the important benefits of using the questionnaire for data collection is that it is not expensive. You save time, money, and resources. Furthermore, respondents can
+express themselves more freely as they are not required to reveal their names.
+However, questionnaires are not without disadvantages. Some questions
+DOI: 10.4236/ce.2019.104057
+
+775
+
+Creative Education
+
+Q. Faryadi
+
+might be biased. Some participants might not answer all the questions truthfully
+or they might be in a hurry and will simply rush through the questionnaire
+without giving the questions much thought. Moreover, you cannot ask questions
+that are deemed sensitive.
+4.7.4. Secondary Data Collection Sources
+Secondary data sources refer to existing information in the form of specific subjects, books, monographs, hospital records, etc. that provide second-hand data.
+In other words, the author is not the original source of the information but is
+only citing or extracting information from the original source. The documents
+are already established and documented by scholars and have undergone rigorous scientific measurement. Examples are academic text books, journal review
+articles, documentaries, biographies, official statistics and annotations. The advantage of doing secondary data collection is that you can interpret information
+and present it based on their types. Collection of secondary data is as crucial as
+primary data collection. It is important to collect from sources that are relevant
+to your research. Take note of your citation and ensure there is proper referencing to the actual data source.
+1) Disadvantages of Secondary Data
+Validity and reliability of source as well as information might be questionable.
+The possibility of bias especially from sources such as personal views, articles,
+diaries and magazines. There might be problems accessing relevant or related
+data for verification.
+4.7.5. Data Analysis Process
+Once you have finished the collection of data, you have raw data in your hands.
+Such data do not mean anything unless you analyze and interpret them. The data must undergo an important process called data analysis. This is a systematic
+process of applying logical technique and statistical instrument to give meaning
+and interpretation to your data. Your data must be illustrated and evaluated
+properly so that it leads you to a meaningful conclusion. Your results and the
+accuracy of your findings depend on whether your data have been analyzed correctly. When conducting data analysis, a sound theoretical framework must be
+applied. One of the significant data analysis techniques that is developed by
+Miles and Huberman (1994) has a theoretical framework that describes the major phases of data analysis. Pre-test, post-test, questionnaires, surveys, observation, checklist and interviews must be coded and made ready for data entry. A
+significant and primary tool to analyse collected data is the Statistical Package
+for Social Sciences (SPSS) and Microsoft Excel computer software programmes.
+The most commonly used modules of statistical analyses include descriptive
+statistics (means, standard deviations, frequencies, counts and percentages), and
+common statistical tools (ANOVA, pairwise t-test, etc.). Based on Miles and
+Huberman’s framework, the collected data are analysed as follows:
+1) Data Reduction
+You should use a combination of deductive and inductive analyses to organise
+DOI: 10.4236/ce.2019.104057
+
+776
+
+Creative Education
+
+Q. Faryadi
+
+your collected data. The data must be categorized and meaningfully reconfigured. Select crucial data to focus on, then simplify and extract them for easy
+comprehension.
+2) Data Display
+Patterns and interrelationships among the collected data must be organized.
+Critical means and supporting evidence should be carefully analyzed. The data
+should be organized based on your research questions, problem, and hypotheses.
+3) Data Verification
+Data conformity and validity must be verified. The implications of collected
+data for your research questions must be verified. Your data must be
+cross-checked several times to determine its validity and reliability. Please take
+note that if you are not an expert on handling statistics and data analysis, you
+can get an expert to help you (Faryadi, 2012).
+
+4.8. Important Considerations When Doing Your Research
+1) Do not take off your shoes without seeing the water: Research is all
+about techniques, employing the appropriate methodology and method, having
+an open and unbiased mind, and ability to make predictions. However, do not
+make any decision without a thorough investigation of the possibilities.
+2) Arm yourself with relevant knowledge: Ignorance is the mother of all
+problems. So, read and read and read until you think you have the power to
+conquer the mountain. Only a knowledgeable person can think of a good problem and formulate answerable research questions.
+3) Don’t be too ambitious and expect too much: Walk your journey slowly.
+Think of your questions. Do not pose big questions that might take a lifetime to
+answer. Think of questions that offer the possibility of being answered, taking
+into consideration your expertise, time and resources. If you think that you
+cannot achieve an outcome, don’t waste your time and resources; be adaptable
+and make changes. Think of an investigation that you can pose precise questions
+and hypotheses. You must know what you are doing; otherwise, you are wasting
+a huge portion of your life.
+4) Don’t be arrogant, prejudiced, or selfish: A good research requires a
+good honest researcher who is also a gentleman. If you don’t know something,
+be honest with yourself and ask your peers for help. At the same time, read and
+read. Go to the library and arm yourself with the sword of knowledge so that you
+can make informed decisions. Arrogance destroys your findings. Remember this
+saying? Those who know that they don’t know are better than those who don’t
+know that they don’t know. You are not expected to be an expert on everything.
+Therefore, be humble and ask for help if and when necessary.
+
+5. PhD Results Process
+5.1. Results
+Now you are in the Results chapter of your thesis. Congratulations! The time has
+DOI: 10.4236/ce.2019.104057
+
+777
+
+Creative Education
+
+Q. Faryadi
+
+come to enjoy the fruits of your labour. Now you can declare to the world what
+you have discovered in your investigation. No discussion in this chapter. You
+need only to document your results scientifically. Just report the information
+collected and analyze your findings without bias. Your results should be accompanied by figures, tables, charts as well as illustrations, if necessary, so that your
+problem statement, hypothesis and research questions are addressed clearly.
+Take note that your results, whether negative or positive, are still significant
+contributions to existing knowledge.
+
+5.2. PhD Result Writing Process
+When you are reporting your results, make sure they are properly organized. It
+is always helpful to start with a small abstract-style introduction stating what you
+intend to do in this chapter. A short paragraph would help your reader remember your research problem, questions and hypothesis so that when they read this
+chapter, they can understand your results better. Pay attention to the key findings of your investigation. Report your results in the past tense as the data have
+already been collected. When you are declaring your results, do not mention
+phrases such as I, We, or I found that…, we found that… because it is unprofessional for a scholar to boast. Instead you may state: this research has investi-
+
+gated, this study has found that…. and so on.
+Start from your problem statement and put forth evidence to show that you
+have proved or disproved the research problem. Mention your research questions and explain with evidence what you have discovered. Have you answered
+all your research questions? Next, discuss your hypothesis and explain whether it
+was accepted or rejected, using evidence based on your results. Explain your
+findings and relate them to your problem, questions and hypothesis. Show the
+significance of your findings. Do not interpret and discuss anything in the Results chapter. Only report what you have found, based on the data collected. Any
+interpretation and argument can be discussed in the chapter that follows, i.e. the
+Conclusion chapter.
+The length of your Results chapter depends on the amount of data collected as
+well as the number of charts, tables, graphs, etc. to make the presentation of your
+results more meaningful and easier to understand. Outline the significance of
+your findings chronologically. Report the most significant part of your results
+first. At the end of the Results chapter, write a concluding paragraph similar to
+the one in the introduction. In this way, your readers will remember what you
+have stated earlier.
+
+5.3. When Documenting Your Results, Keep in Mind
+1) The Results section is indeed a very important section of your scholarly and
+scientific research. Here you are reporting the results of all the investigations,
+data collection and their analysis. Write in a scientific and scholarly style. Use
+proper terminology when writing your results. Do not attempt to interpret the
+DOI: 10.4236/ce.2019.104057
+
+778
+
+Creative Education
+
+Q. Faryadi
+
+findings; just report what you discovered objectively. Make sure that you write
+clearly and use charts or tables to help your reader understand your findings and
+relate them to your investigation.
+2) Don’t worry if your findings do not support your hypothesis or your research questions, just be professional and honest. Even if you have negative results, they are still significant findings which may be of interest to other researchers so that they continue to investigate further. The findings of any research must be verifiable by other researchers (Bavdekar & Chandak, 2015).
+3) Make an outline of the content in the Results chapter so that you know exactly what to include or exclude. Just imagine you are narrating a story to your
+audience. Make sure that your narration does not go beyond the scope of the
+story. Similarly, when presenting your results, make sure that you narrate whatever is relevant to your problem, questions and hypothesis. If you put in too
+many facts and unnecessary findings, your Results chapter will be cluttered and
+dense. So be concise and to the point, so that your results are manageable and
+easy to understand.
+4) Report your results using statistics to support your claims. At the end of the
+chapter, make a summary of how the results yielded answers to your problem,
+questions and hypothesis.
+As apparent from the above explanation, the objective of your Results chapter
+is to outline the crucial findings of your investigations without discussion and
+interpreting the meaning of your variables and findings. Take note that your
+thesis is a fine piece of scholarly writing. You must make sure that it is free from
+typing errors and grammatical mistakes. Use a reputable editor to fine tune your
+thesis-writing.
+
+6. The PhD Discussion and Conclusion Chapter
+Writing the Conclusion is as challenging as writing your Introduction. One big
+difference, however, is that in the Introduction chapter, you pose questions to
+your audience while in this chapter, you present the answers to those questions.
+It is important to bear in mind that the Conclusion is not a summary of your Introduction even though it needs a paragraph that may summarize the whole thesis.
+In the Conclusion chapter, it might be useful to mention briefly again your
+research questions and hypotheses so that the reader can relate it to the discussion of your findings. Outline your objectives in conducting the research. Emphasize the importance of your investigation and the answers you have found.
+Discuss the why, the what and the how of your investigation. Emphasize the
+significance and impact of your research in your Conclusion. Your readers are
+keen to know how your findings have contributed to existing knowledge in the
+discipline. They are also eager to know how your investigation could provide
+solutions to similar problems.
+In the Conclusion, you should argue how your findings have bridged the gap
+DOI: 10.4236/ce.2019.104057
+
+779
+
+Creative Education
+
+Q. Faryadi
+
+in the particular area of knowledge. You should provide adequate information
+for other researchers to conduct further studies with a suitable methodology
+such as yours. Do not add any unrelated materials that are not part of your research. The Conclusion chapter, like the rest of the chapters, should follow a
+scientific style of thesis writing as other scholars might want to cite your paper to
+acknowledge your contribution. When you present your arguments, avoid mentioning your weaknesses. Always stress that you have a reliable and measurable
+outcome and contribution (Robert et al., 2005).
+Remember, when writing the Introduction chapter, you start from general to
+specific statements but in your Conclusion, it is vital to remember that you discuss everything starting from specific and end up with a general understanding
+of things. Direct your readers to the real applications of your findings and to
+what extent the findings can be generalized. When you are writing your conclusion, it is vital that pose some questions for your readers to ponder on. Make
+sure to summarize the main issues in your thesis so that you can refresh the
+reader’s memory.
+In addition, stress the fact that you have proved or disproved your problem,
+that you have answered your research questions, and tested your hypothesis.
+Remember, your Conclusion is the most important part of your thesis. Many
+readers read the abstract, a little bit of introduction, go through your results and
+focus on the relevance and impact of your findings. That is your conclusion.
+Now is your chance to answer this question in a scholarly manner and make
+your point that your research is worthy of reading as you have accomplished
+what you have set out to investigate.
+
+Consider the Following When Writing Your PhD Conclusion
+1) Explain clearly what we understand now that we did not understand before.
+Write for your readers, not for yourself. Never mention the words I, We or I
+found that and so on.
+2) Explicate your problem statement and show with evidence from the Results
+section that you have indeed bridged a gap in knowledge as pointed out earlier
+in your literature review.
+3) Show how your hypotheses have proven or otherwise and their significance.
+Don’t worry if your results are negative or positive; they are still significant. For
+example, a study claimed that magnesium chloride is not the solution for de-
+
+pression. However, your experimental results showed that magnesium chloride
+is, in fact, the solution for fighting severe depression. There you are! Start reasoning and give evidence from scholarly publications that support your hypothesis and findings. Those supportive references should be in your literature review chapter.
+4) Discuss the significance of your contribution as a result of your investigation.
+5) Lastly, do not forget to be concise and precise.
+DOI: 10.4236/ce.2019.104057
+
+780
+
+Creative Education
+
+Q. Faryadi
+
+It is evident from the above discussion that a piece of scholarly research must
+pass specific tests, such as those concerning its methodology (quantitative, qualitative, experimental, observation and so on), validity (logical procedure to answer a question), and reliability (quality of measurement), besides having an unbiased conclusion (accurate measures are taken to make sure that it is free from
+vested interest). As such, a PhD thesis should be a significant contribution to existing academic knowledge. As apparent from the above discussion, your thesis
+either must confront or concur with existing literature with regard to your research findings. Your conclusion must elucidate the originality of the problem
+and illustrate what critical thinking and skills have been used to prove or disprove the problem. In the Conclusion, you must explain how the problem was
+solved and how it has bridged the gap in existing knowledge. Let’s us sum up the
+differences between the introduction, discussion, and conclusion so that you
+have an idea how these sections are interlinked.
+
+7. Summary
+7.1. Introduction
+The Introduction starts with a general statement and aims to engage the reader’s
+interest and curiosity.
+It introduces the main issue of the thesis, i.e. your problem statement and
+emphasizes the significance of the study. It poses the research question and
+states how it will be answered. An outline of the research strategy is given. It
+highlights the severity of the research problem and cites documented evidence.
+An ideal introduction should form 10% of your total thesis.
+
+7.2. Discussion
+The Discussion is an important part of your thesis. In this section, you need to
+argue scientifically and logically to defend, support, and explain your answers to
+the research questions. Remember that your thesis may not be a perfect one, but
+you should endeavour to make your readers understand the significance of your
+findings. When writing your discussion, make sure to include only issues that
+are of vital importance, while excluding less important issues. Always start with
+specific issues, i.e. interpret your findings, and gradually move on to discuss how
+your findings can be generalized and applied. Don’t forget to show how sound,
+field-tested theories have lent support to your findings. You can also cite documented evidence from other researchers who have done similar studies on the
+related topic. Point out how your application of an appropriate methodology
+and clearly-defined concepts have increased the validity and reliability of your
+investigation. Do not deviate from your original terminologies, concepts, and
+key words introduced at the beginning of your thesis. It is important to always
+link your results and findings to current and peer reviewed literature. In your
+discussion, you must address all important issues such as your problem, research
+questions and hypotheses one by one, and support your justification with docuDOI: 10.4236/ce.2019.104057
+
+781
+
+Creative Education
+
+Q. Faryadi
+
+mented evidence from your findings and other scholarly work. Impartiality is
+vital when discussing arguments from scholars who have contrarian views. If
+you don’t agree with a particular researcher, explain why your point of view is
+more reasonable, practical and relevant to the study at hand. Explain how your
+findings are different from others and support your claims with evidence. If
+you have conflicting findings, explicate them so that you can make a meaningful and logical presentation. Remember to briefly outline the potential
+real-life applications of your findings so that you can show their significance
+and impact.
+
+7.3. Important Tips When Writing Your Discussion
+When you write your discussion chapter, state the main points and show their
+significance by bringing in current and relevant evidence. Keep in mind that
+your Discussion section is like the heart of your thesis, keeping the other parts
+connected and relevant. When you discuss your findings, you are also highlighting the significance of your results in relation to your research questions.
+The main purpose of the Discussion is to enlighten your readers about the significance of your findings. The Discussion highlights the evidence and data you
+have collected and shows how your research questions have been answered. The
+Discussion should also refer to other similar or related studies.
+You should aim to show the truth; your job is not to prove or disprove anything. Always remember that there are other possible answers to your research
+questions. Show your research findings can be applied to real life situations.
+Don’t forget to discuss the weaknesses and the limitations of the study so that
+other researchers can carry on further investigative work that is beyond the
+scope of your study.
+Never speculate but keep your focus on the research topic. Keep in mind that
+the Discussion chapter is a humble presentation of your scientific investigation.
+Have respect for other scholastic work and do not be too critical. Do not be defensive. If you follow these ethics of research, you will be acknowledged among
+your peers.
+
+7.4. Conclusion
+The conclusion chapter reaffirms your topic, problem, questions, and hypotheses. Mention the main points from your Introduction, emphasize why and what
+you have set out to do, then briefly report the findings and their significance.
+Although it may sound repetitive, mentioning the main points again will reinforce your message. Maintain the flow of your thesis and do not add any new
+points that are not part of your investigation. Don’t be selfish about your work;
+leave room for other researchers to challenge or support your research. In fact,
+you need to mention that further investigations are needed to strengthen the validity and reliability of your study. Do not repeat the same old thing again and
+again. An ideal conclusion should form 10% of your total thesis.
+DOI: 10.4236/ce.2019.104057
+
+782
+
+Creative Education
+
+Q. Faryadi
+
+Conflicts of Interest
+The author declares no conflicts of interest regarding the publication of this paper.
+
+References
+Al-Raqqad, H. K., Al-Bourini, E. S., Al Talahin, F. M., & Aranki, R. M. E. (2017). The
+Impact of School Bullying on Students’ Academic Achievement from Teachers Point of
+View. International Education Studies, 10, 44-50. https://doi.org/10.5539/ies.v10n6p44
+Bavdekar, S. B., & Chandak, S. (2015) Results: Unravelling the Findings. Journal of the
+Association of Physicians of India, 63, 44-46.
+Bogdan, R. C., & Biklen, S. K. (2003). Qualitative Research for Education: An Introduction to Theories and Methods (4th ed., pp. 4-7). Boston: Allyn and Bacon.
+Faryadi, Q. (2012). How to Write Your PhD Proposal: A Step-By-Step Guide. American
+International Journal of Contemporary Research, 2, 111-115.
+Faryadi, Q. (2018). PhD Thesis Writing Process: A Systematic Approach—How to Write
+Your Introduction. Creative Education, 9, 2534-2545.
+https://doi.org/10.4236/ce.2018.915192
+García, S., & Fombona, J. (2015). Approach to the Phenomenon of M-Learning in English
+Teaching. Digital Education Review, 28, 19-36.
+Golafshani, N. (2003). Understanding Reliability and Validity in Qualitative Research.
+The Qualitative Report, 8, 597-606.
+Gordon, R., & Petre, M. (2010). The Unwritten Rules of PhD Research Open Up Study
+Skills (p. 14). Berkshire: Open University Press.
+Hanson, W. E., Plano Clark, V. L., Petska, K. S., Creswell, J. W., & Creswell, J. D. (2005).
+Mixed Methods Research Designs in Counselling Psychology. Journal of Counselling
+Psychology, 52, 224-235. https://doi.org/10.1037/0022-0167.52.2.224
+Hoepfi, M. C. (1997). Choosing Qualitative Research: A Primer for Technology Education Researchers. Journal of Technology Education, 9, 47-63.
+Kumar, R. (2011). Research Methodology, a Step-by-Step Guide for Beginners. Thousand
+Oaks, CA: SAGE Publications Ltd.
+MacDonald, S., & Headlam, N. (2014). Research Methods Handbook, Introductory Guide
+to Research Methods for Social Research. Manchester: Centre for Local Economic
+Strategies.
+Miles, M. B., & Huberman, A. M. (1994). Qualitative Data Analysis (2nd ed.). Thousand
+Oaks, CA: Sage Publications.
+Robert, F., Elizabeth, M., & Brian, W. (2005). Composing Effective Paragraphs. Print Preview: A Guide to Academic Writing Success (pp. 40-56). Toronto: Pearson Education
+Canada Inc.
+Thompson, P. (2004). Researching Family and Social Mobility with Two Eyes: Some Experiences of the Interaction between Qualitative and Quantitative Data. International
+Journal of Social Research Methodology, 7, 237-257.
+https://doi.org/10.1080/1364557021000024785
+
+DOI: 10.4236/ce.2019.104057
+
+783
+
+Creative Education
+
+

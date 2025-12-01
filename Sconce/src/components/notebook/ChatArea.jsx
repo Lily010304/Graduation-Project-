@@ -1,17 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Upload } from 'lucide-react';
+import { Send, Upload, Trash2 } from 'lucide-react';
 import { useChatMessages } from '../../hooks/useChatMessages';
 import { useSources } from '../../hooks/useSources';
 import AddSourcesDialog from './AddSourcesDialog';
+import MessageRenderer from './MessageRenderer';
 
 export default function ChatArea({ notebookId, notebook, hasSource, onCitationClick }) {
   const [message, setMessage] = useState('');
   const [showAddSourcesDialog, setShowAddSourcesDialog] = useState(false);
-  const { messages, sendMessage, isSending } = useChatMessages(notebookId);
+  const { messages, sendMessage, isSending, deleteChatHistory, isDeletingChatHistory } = useChatMessages(notebookId);
   const { sources } = useSources(notebookId);
   const [pendingUserMessage, setPendingUserMessage] = useState(null);
   const [showAiLoading, setShowAiLoading] = useState(false);
   const [clickedQuestions, setClickedQuestions] = useState(new Set());
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
   const latestRef = useRef(null);
   const scrollAreaRef = useRef(null);
 
@@ -42,12 +44,16 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
 
   const handleSend = async (text) => {
     const content = text || message.trim();
-    if (!content || !notebookId || isChatDisabled) return;
+    if (!content || !notebookId || isChatDisabled || isSendingMessage) return;
+    
+    // Prevent double-send
+    setIsSendingMessage(true);
     
     // Show user message immediately
     setPendingUserMessage(content);
     
     try {
+      console.log('Sending message:', content);
       await sendMessage({ notebookId, content });
       setMessage('');
       
@@ -57,6 +63,9 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
       console.error('sendMessage failed', e);
       setPendingUserMessage(null);
       setShowAiLoading(false);
+    } finally {
+      // Add a small delay before allowing another send
+      setTimeout(() => setIsSendingMessage(false), 1000);
     }
   };
 
@@ -148,8 +157,24 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden">
       <div className="p-4 border-b border-gray-200 flex-shrink-0">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
           <h2 className="text-lg font-medium text-gray-900">Chat</h2>
+          {messages.length > 0 && (
+            <button
+              onClick={() => {
+                if (window.confirm('Are you sure you want to clear all chat messages?')) {
+                  deleteChatHistory(notebookId);
+                  setPendingUserMessage(null);
+                  setShowAiLoading(false);
+                }
+              }}
+              disabled={isDeletingChatHistory}
+              className="flex items-center space-x-2 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Trash2 className="h-4 w-4" />
+              <span>{isDeletingChatHistory ? 'Clearing...' : 'Clear Chat'}</span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -188,13 +213,17 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
                   <div key={msg.id} className={`flex ${isUserMessage(msg) ? 'justify-end' : 'justify-start'}`}>
                     <div className={`${isUserMessage(msg) ? 'max-w-xs lg:max-w-md px-4 py-2 bg-blue-500 text-white rounded-lg' : 'w-full'}`}>
                       <div className={isUserMessage(msg) ? '' : 'text-gray-800'}>
-                        {msg.message.content}
+                        <MessageRenderer 
+                          content={msg.message.content} 
+                          onCitationClick={onCitationClick}
+                          isUserMessage={isUserMessage(msg)}
+                        />
                       </div>
                     </div>
                   </div>
                 ))}
 
-                {pendingUserMessage && (
+                {pendingUserMessage && !messages.some(m => isUserMessage(m) && m.message.content === pendingUserMessage) && (
                   <div className="flex justify-end">
                     <div className="max-w-xs lg:max-w-md px-4 py-2 bg-blue-500 text-white rounded-lg">
                       {pendingUserMessage}
@@ -227,9 +256,9 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
                 placeholder={getPlaceholderText()}
                 value={message}
                 onChange={e => setMessage(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && !isChatDisabled && !isSending && !pendingUserMessage && handleSend()}
+                onKeyDown={e => e.key === 'Enter' && !isChatDisabled && !isSending && !pendingUserMessage && !isSendingMessage && handleSend()}
                 className="w-full pr-24 px-3 py-2 border border-gray-300 rounded-md"
-                disabled={isChatDisabled || isSending || !!pendingUserMessage}
+                disabled={isChatDisabled || isSending || !!pendingUserMessage || isSendingMessage}
               />
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-500">
                 {sourceCount} source{sourceCount !== 1 ? 's' : ''}
@@ -237,10 +266,10 @@ export default function ChatArea({ notebookId, notebook, hasSource, onCitationCl
             </div>
             <button
               onClick={() => handleSend()}
-              disabled={!message.trim() || isChatDisabled || isSending || !!pendingUserMessage}
+              disabled={!message.trim() || isChatDisabled || isSending || !!pendingUserMessage || isSendingMessage}
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
             >
-              {isSending || pendingUserMessage ? (
+              {isSending || pendingUserMessage || isSendingMessage ? (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
               ) : (
                 <Send className="h-4 w-4" />

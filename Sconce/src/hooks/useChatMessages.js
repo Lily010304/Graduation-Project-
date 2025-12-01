@@ -169,15 +169,15 @@ export const useChatMessages = (notebookId) => {
 
   const sendMessage = useMutation({
     mutationFn: async ({ notebookId, content }) => {
-      // Call n8n webhook
-      const N8N_URL = import.meta.env.VITE_N8N_URL || 'https://gracelessly-factious-herb.ngrok-free.dev/webhook';
-      const AUTH_TOKEN = import.meta.env.VITE_N8N_AUTH || '395ca650972342ee8a4778957ffed288294c6400827d4eb8b455f8f87edfe03b';
+      // Call Supabase Edge Function
+      const SUPABASE_URL = 'https://yuopifjsxagpqcywgddi.supabase.co';
+      const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
       
-      const response = await fetch(`${N8N_URL}/chat`, {
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/send-chat-message`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${AUTH_TOKEN}`
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
         },
         body: JSON.stringify({
           session_id: notebookId,
@@ -186,6 +186,8 @@ export const useChatMessages = (notebookId) => {
       });
 
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Edge function error:', errorText);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 

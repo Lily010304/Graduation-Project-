@@ -1,0 +1,186 @@
+San José State University Writing Center
+www.sjsu.edu/writingcenter
+Written by Mario John Chris
+
+Methodology Section for Research Papers
+The methodology section of your paper describes how your
+research was conducted. This information allows readers to check
+whether your approach is accurate and dependable. A good
+methodology can help increase the reader’s trust in your findings.
+First, we will define and differentiate quantitative and qualitative
+research. Then, for each of these types of research, we will look
+at the kinds of information that a methodology should provide.
+This handout has annotated examples of both quantitative and
+qualitative methodologies.
+
+What are Quantitative and Qualitative Research?
+Quantitative research involves collecting numerical data and conducting mathematical analyses
+to observe trends, make predictions, run experiments, and test hypotheses. Qualitative research
+involves collecting non-numerical data and identifying patterns in language, theme, and
+structure, among other features, to understand human experiences. Instruments for qualitative
+research include questionnaires, interviews, and observations.
+
+What Information Should You Include in the Methodology?
+The goal of your methodology is to increase the credibility of your research by making your
+process transparent and reproducible. Your methodology should begin by describing your
+research question and the type of data you used in answering it. You want to indicate why this
+type of data is appropriate, relevant, and important to the question being asked.
+You will then explain your process of data collection. This is the place to state the tools and
+materials that were used to collect data, the process and criteria you used to sample subjects, and
+the size of your sample. If your research was quantitative, you will specify how your data was
+measured. If your research was qualitative, you will describe how data was recorded and how
+you observed and/or participated in the study. You want to provide enough detail for readers to
+be able to replicate your procedure. If you used existing data sets instead of collecting new data,
+you can elaborate on where you found the data sets, how the set was originally produced, and
+what criteria you used to select the data. Remember to explain why you made these decisions.
+After describing data collection, you will elaborate on data analysis. This includes how you
+prepared the data for analysis and what tools you used to analyze it. If your research was
+quantitative, you will outline the mathematical calculations you performed. You will also explain
+why your calculations were appropriate for the data and the research question in hand. If your
+research was qualitative, you will describe your process of interpreting, labeling, and analyzing
+Methodology Section for Research Papers, Spring 2021.
+
+1 of 5
+
+data. When working with personal or sensitive data, you should describe the steps you took to
+protect the privacy of your sources.
+Finally, you will justify the approach you took. You should show that your approach was
+appropriate to answering your research question. If your approach is unconventional, you should
+explain why your approach was more effective than other methods. This is the place to mention
+any difficulties or challenges you encountered in your approach and to explain how you
+addressed these issues.
+
+Sample Quantitative Methodology with Annotations
+Study site. This study was conducted within an intact tabonuco
+(Dacryodes excelsa)-dominated forest at ca 400 m elevation near
+El Verde Field Station in the Luquillo Experimental Forest (LEF),
+Puerto Rico (18°10’N, 65°30’W). The site is classiﬁed as a
+subtropical wet forest, with average temperatures ranging between
+21°C in January and 25°C in August (Waide & Reagan 1996).
+Annual precipitation averages 3700 mm and varies seasonally,
+with 200 to 250 mm/mo during January–April (dry season) and
+350 mm/mo for the remainder of the year (McDowell &
+Estrada-Pinto 1988). Precipitation exceeds evapotranspiration in
+all months. Soils are Ultisols belonging to the Los Guineos series,
+which are well drained, acidic clays and silty clay loams (Waide &
+Reagan 1996).
+Literbag preparation. Although litterbags may not accurately
+depict true rates of litter decomposition due to the artiﬁcial drying
+of the leaves (Taylor 1998), exclusion of large soil fauna (Stewart
+& Davies 1989, González & Seastedt 2001), and microclimatic
+alterations imposed on the decaying material (Heal et al. 1997), the
+technique is a useful tool for experimental comparison of litter
+decay (Swift et al. 1979, Heal et al. 1997). . . . Upon collection,
+leaves were air-dried for 48 hours and stored until use. Litter of
+each type was thoroughly mixed and litterbags (10 x 10 cm, 1 mm
+ﬁberglass mesh) were then ﬁlled, so that each contained 2.5 ± 0.1 g
+of leaf litter from only one of each species and treatment (green or
+senesced). . . . Bags were placed on the forest ﬂoor in early
+November 2001 and ﬁve replicates of each species and treatment
+combination were collected at each of four sampling dates: 14, 28,
+56, and 112 days. Upon collection, litterbags were oven-dried for
+seven days at 50°C. Bags were then dismantled, leaf litter was
+separated from soil, roots, and other debris, and the remaining leaf
+Methodology Section for Research Papers, Spring 2021.
+
+2 of 5
+
+material was weighed to determine the fraction of leaf mass
+remaining.
+Nutrient analysis. Four subsamples for each species and treatment
+were collected from the bulk litter during litterbag construction and
+analyzed for total C, N, and ﬁber using methods described by
+Madritch and Hunter (2002). Brieﬂy, samples were dried at 65°C
+for three days, ground into a ﬁne powder, and then stored at 80°C
+prior to analyses. Carbon and nitrogen were measured using a
+Carlo Erba NA 1500 CHN Analyzer Ⓡ (Carlo Erba
+Instrumentazione, Milan, Italy). Dry mass percentages of cellulose,
+hemicellulose, and lignin were determined using sequential neutral
+detergent/acid digestion in an Ankom Fiber Analyzer Ⓡ (ANKOM,
+Fairport, New York).
+Data analysis. The decomposition of leaf litter is commonly
+described by a negative exponential function of the form: Xt/X0 =
+e–kt, where X0 is the initial mass of litter, Xt is the mass of litter at
+time t, and k is the decay rate constant (Olson 1963, Swift et al.
+1979). The decay rate constant k thus provides a single,
+functionally relevant parameter for describing decomposition. This
+simple model, however, has been shown to inadequately depict
+early stages of mass loss in some studies, thus prompting
+modiﬁcations to the model (Gallardo & Merino 1993, Sullivan et
+al. 1999). In this study, rapid initial mass losses of over 20 percent
+in the ﬁrst two weeks resulted in a poor ﬁt of this traditional decay
+model since the model requires the y-intercept to pass through
+zero. To redress this problem, we allowed an intercept term yint in
+the model that serves as an indicator of the initial mass loss or
+leaching losses (Sullivan et al. 1999). This resulted in a model of
+the form: ln(Xt/X0) = –k’t + yint, where Xt is the mass remaining at
+time t, X0 is the original mass of the substrate, and k’ is a decay
+rate constant describing a post-leaching phase of decomposition.
+Multiple linear regression models using indicator variables for
+treatment (green vs. senescent) were applied separately for each
+species to test for differences in slope (k’) and yint between green
+and senescent litters. N, C, ﬁber, and other litter quality indices
+were analyzed for differences between green and senescent leaves
+across all species using analysis of variance and within-species
+using two-sample t-tests. Litter quality indices were also tested
+Methodology Section for Research Papers, Spring 2021.
+
+3 of 5
+
+against the decay rates k’ using simple linear regression to
+determine which indices best correlated with decay rates across all
+species and treatments. All statistical analyses were conducted
+using S-Plus statistical software (MathSoft 2000).
+Source: Fonte and Schowalter, “Decomposition of Greenfall vs. Senescent Foliage in a Tropical
+Forest Ecosystem in Puerto Rico,” bioTROPICA, 36(4) 2004.
+
+Sample Qualitative Methodology with Annotations
+To find out how Twitter users imagine their audience, we asked
+them directly. We posted questions to our own followers (many of
+whom retweeted our question to their followers) and sent @reply
+questions to a sample of users whose tweets appear in the public
+timeline, every person in the 300 most-followed accounts (249
+total), and a subset of users with 1000–15,000 followers. While all
+the Twitter accounts we reference are public, we anonymized all of
+our informants except the highly-followed users. Our questions
+included: ‘Who do you imagine reading your tweets?’ and ‘Who
+do you tweet to?’ Later, we asked: ‘What makes an individual
+seem “authentic” on Twitter? (Or what does it mean to be
+authentic?)’ and ‘What won’t you tweet about? What subjects are
+inappropriate for Twitter?’ Our goal in approaching different types
+of users was not to get a representative sample of Twitter users but
+to elicit potentially diverse perspectives.
+Given the issues mentioned above, we are unable to assess how
+many people saw our tweets. We received 226 responses from 181
+Twitter users through direct messages or @replies to our queries.
+The responses we received revealed many different perspectives on
+audience. While we can neither quantify audience management
+techniques nor account for all potential perspectives, the responses
+we received provide valuable insight into some core differences in
+conceptualizing audience. Future empirical work might examine
+the prevalence of these strategies and their relationship to follower
+counts, demographics, or genres of content.
+Source: Marwick and Boyd, “I tweet honestly, I tweet Passionately: Twitter Users, Context
+Collapse, and the Imagined Audience,” New Media & Society, 13(1) 2011.
+
+Methodology Section for Research Papers, Spring 2021.
+
+4 of 5
+
+Activity: Learn About Methodologies in Your Field
+Navigate to Google Scholar or your library database. Or visit the SJSU ScholarWorks page
+(scholarworks.sjsu.edu), click “Collections,” select a college, select a department, and then click
+to view “Master’s Theses and Graduate Research.” Find some articles, both quantitative and
+qualitative if possible, on a high interest topic for your chosen field.
+Compare the methodologies in these articles to the two samples we looked at above. What is
+similar? What is different? What patterns seem most common? How long are the sections?
+
+Reference
+University of Southern California. Organizing Your Research Paper Methodology. USC
+Libraries, 2021, July 27, https://libguides.usc.edu/writingguide/methodology.
+
+Methodology Section for Research Papers, Spring 2021.
+
+5 of 5
+
+
