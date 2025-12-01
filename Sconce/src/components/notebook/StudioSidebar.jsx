@@ -3,6 +3,7 @@ import { Plus, ChevronRight, ChevronLeft, FileText, X } from 'lucide-react';
 import { useNotes } from '../../hooks/useNotes';
 import { useSources } from '../../hooks/useSources';
 import * as Dialog from '@radix-ui/react-dialog';
+import ReactMarkdown from 'react-markdown';
 
 export default function StudioSidebar({ notebookId, onCitationClick, isVisible, onToggle }) {
   const [loading, setLoading] = useState(false);
@@ -161,10 +162,28 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
               </Dialog.Close>
             </div>
             <div className="p-6 overflow-y-auto max-h-[calc(80vh-80px)]">
-              <div className="prose prose-sm max-w-none">
-                <pre className="whitespace-pre-wrap font-sans text-gray-700 leading-relaxed">
+              <div className="prose prose-slate max-w-none">
+                <ReactMarkdown
+                  components={{
+                    h1: ({node, ...props}) => <h1 className="text-2xl font-bold text-gray-900 mt-6 mb-4" {...props} />,
+                    h2: ({node, ...props}) => <h2 className="text-xl font-bold text-gray-900 mt-5 mb-3" {...props} />,
+                    h3: ({node, ...props}) => <h3 className="text-lg font-semibold text-gray-900 mt-4 mb-2" {...props} />,
+                    p: ({node, ...props}) => <p className="text-gray-700 leading-relaxed mb-4" {...props} />,
+                    ul: ({node, ...props}) => <ul className="list-disc list-inside mb-4 space-y-2" {...props} />,
+                    ol: ({node, ...props}) => <ol className="list-decimal list-inside mb-4 space-y-2" {...props} />,
+                    li: ({node, ...props}) => <li className="text-gray-700 ml-4" {...props} />,
+                    strong: ({node, ...props}) => <strong className="font-semibold text-gray-900" {...props} />,
+                    em: ({node, ...props}) => <em className="italic text-gray-800" {...props} />,
+                    code: ({node, inline, ...props}) => 
+                      inline 
+                        ? <code className="bg-gray-100 text-pink-600 px-1.5 py-0.5 rounded text-sm font-mono" {...props} />
+                        : <code className="block bg-gray-100 p-4 rounded-lg text-sm font-mono overflow-x-auto mb-4" {...props} />,
+                    blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-4" {...props} />,
+                    a: ({node, ...props}) => <a className="text-blue-600 hover:underline" {...props} />,
+                  }}
+                >
                   {selectedNote?.content}
-                </pre>
+                </ReactMarkdown>
               </div>
               <div className="mt-6 pt-4 border-t border-gray-200">
                 <p className="text-sm text-gray-500">
