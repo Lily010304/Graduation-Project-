@@ -117,6 +117,15 @@ export const useSources = (notebookId) => {
 
   const deleteSource = useMutation({
     mutationFn: async (sourceId) => {
+      // First, delete associated documents from vector store
+      const { error: docError } = await supabase
+        .from('documents')
+        .delete()
+        .eq('metadata->>source_id', sourceId);
+      
+      if (docError) console.error('Error deleting documents:', docError);
+
+      // Then delete the source
       const { error } = await supabase
         .from('sources')
         .delete()
