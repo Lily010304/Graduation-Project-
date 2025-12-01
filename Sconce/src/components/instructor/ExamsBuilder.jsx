@@ -25,10 +25,25 @@ const DEFAULT_ANSWERS = () => ([
 const TIME_OPTIONS = [5,10,20,30,60,90,120];
 const POINTS_OPTIONS = [ { key: 'std', label: 'Standard' }, { key: 'double', label: 'Double' }, { key: 'none', label: 'No points' } ];
 
-export default function ExamsBuilder() {
+export default function ExamsBuilder({ quizId, courseId, weekId }) {
   const [exams, setExams] = useState(loadExams);
-  const [activeExamId, setActiveExamId] = useState(() => exams[0]?.id);
+  const [activeExamId, setActiveExamId] = useState(() => {
+    // If quizId provided, try to find or create that quiz
+    if (quizId) {
+      const existing = loadExams().find(e => e.id === quizId);
+      if (existing) return quizId;
+      // Create new quiz with this ID
+      const newQuiz = { id: quizId, title: `New Quiz`, questions: [ newQuestion() ], courseId, weekId };
+      const updated = [newQuiz, ...loadExams()];
+      saveExams(updated);
+      return quizId;
+    }
+    return loadExams()[0]?.id;
+  });
   const [activeQuestionId, setActiveQuestionId] = useState(null);
+
+  // Show back button if coming from course editor
+  const showBackButton = courseId && weekId;
 
   // Active models
   const activeExam = useMemo(() => exams.find(e => e.id === activeExamId) || null, [exams, activeExamId]);
@@ -121,7 +136,19 @@ export default function ExamsBuilder() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto grid lg:grid-cols-[280px_1fr_280px] gap-4">
+    <div className="max-w-7xl mx-auto">
+      {showBackButton && (
+        <div className="mb-4">
+          <button 
+            onClick={() => window.location.hash = `#/dashboard/instructor/course/${courseId}`}
+            className="px-4 py-2 rounded-full bg-white border border-gray-300 text-[#0f5a56] hover:bg-gray-50 transition-colors"
+          >
+            ← Back to Course
+          </button>
+        </div>
+      )}
+      
+      <div className="grid lg:grid-cols-[280px_1fr_280px] gap-4">
       {/* Left: Exams + Questions list */}
       <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-3">
         <div className="flex items-center justify-between mb-2">
@@ -259,6 +286,7 @@ export default function ExamsBuilder() {
       <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-3">
         <div className="font-semibold mb-2 flex items-center gap-2"><Eye size={16}/> Preview</div>
         <div className="text-xs text-slate-600">A compact preview will appear here in the future. For now, use Publish to finalize and save.</div>
+      </div>
       </div>
     </div>
   );

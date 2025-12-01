@@ -337,24 +337,31 @@ export function parseInstructorHash(hash = window.location.hash) {
 	// #/dashboard/instructor/courses              -> courses list
 	// #/dashboard/instructor/notebooks            -> AI notebooks
 	// #/dashboard/instructor/notebook/<notebookId> -> single AI notebook detail (new layout)
-	// #/dashboard/instructor/content              -> teaching content overview
-	// #/dashboard/instructor/assessments          -> exams & assignments
-	// #/dashboard/instructor/grading              -> grading workspace
 	// #/dashboard/instructor/messages             -> messages
-	// #/dashboard/instructor/performance          -> performance
-	// #/dashboard/instructor/payments             -> payments
 	// #/dashboard/instructor/schedule             -> schedule
 	// #/dashboard/instructor/course/<courseId>    -> course editor
+	// #/dashboard/instructor/quiz/<quizId>        -> quiz builder
 	const base = '#/dashboard/instructor';
 	if (!hash || !hash.startsWith(base)) return { view: 'home' };
 	const parts = hash.slice(base.length).split('/').filter(Boolean);
 	if (parts.length === 0) return { view: 'home' };
 	if (parts[0] === 'course' && parts[1]) return { view: 'course', courseId: parts[1] };
+	// Quiz builder route
+	if (parts[0] === 'quiz' && parts[1]) {
+		const quizId = parts[1].split('?')[0];
+		const params = new URLSearchParams(hash.split('?')[1] || '');
+		return { 
+			view: 'quiz', 
+			quizId,
+			courseId: params.get('course'),
+			weekId: params.get('week')
+		};
+	}
 	// Notebook detail route (singular)
 	if (parts[0] === 'notebook' && parts[1]) {
 		return { view: 'notebook', notebookId: parts[1] };
 	}
-	const valid = new Set(['courses','notebooks','assessments','grading','messages','performance','payments','schedule']);
+	const valid = new Set(['courses','notebooks','messages','schedule']);
 	if (valid.has(parts[0])) return { view: parts[0] };
 	return { view: 'home' };
 }

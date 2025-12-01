@@ -1,17 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import * as store from '../lib/instructorStore';
-
-const ITEM_TYPES = [
-  { value: 'lecture', label: 'Lecture' },
-  { value: 'reading', label: 'Reading' },
-  { value: 'assignment', label: 'Assignment' },
-  { value: 'quiz', label: 'Quiz' },
-  { value: 'resource', label: 'Resource' },
-];
+import AddContentDialog from './instructor/AddContentDialog';
+import ZoomMeetingDialog from './instructor/ZoomMeetingDialog';
 
 export default function InstructorCourseEditor({ courseId }) {
   const [course, setCourse] = useState(() => (store.getCourse ? store.getCourse(courseId) : null));
   const [selected, setSelected] = useState({ weekId: course?.weeks?.[0]?.id });
+  const [showAddContentDialog, setShowAddContentDialog] = useState(false);
+  const [showZoomDialog, setShowZoomDialog] = useState(false);
   const [addingItem, setAddingItem] = useState(false);
   const [itemType, setItemType] = useState('lecture');
   const [itemTitle, setItemTitle] = useState('');
@@ -52,6 +48,42 @@ export default function InstructorCourseEditor({ courseId }) {
 
   const onUpdateItem = (item, patch) => { if (store.updateItem) store.updateItem(courseId, currentWeek.id, undefined, item.id, patch); refresh(); };
   const onRemoveItem = (item) => { if (confirm('Remove this item?')) { if (store.removeItem) store.removeItem(courseId, currentWeek.id, undefined, item.id); refresh(); } };
+
+  const handleContentTypeSelect = (contentType) => {
+    setShowAddContentDialog(false);
+    if (contentType === 'quiz') {
+      // Navigate to quiz builder
+      const quizId = `quiz_${Math.random().toString(36).slice(2,8)}${Date.now().toString(36).slice(-4)}`;
+      window.location.hash = `#/dashboard/instructor/quiz/${quizId}?course=${courseId}&week=${currentWeek.id}`;
+    } else if (contentType === 'zoom') {
+      // Show Zoom meeting dialog
+      setShowZoomDialog(true);
+    } else {
+      // Show inline form for other content types
+      setItemType(contentType);
+      setAddingItem(true);
+    }
+  };
+
+  const handleZoomSave = (meeting) => {
+    if (!currentWeek) return;
+    const payload = {
+      type: 'zoom',
+      title: meeting.topic,
+      description: meeting.description || `Meeting ID: ${meeting.meetingId}${meeting.password ? ` | Password: ${meeting.password}` : ''}`,
+      url: meeting.joinUrl,
+      durationMins: meeting.duration,
+      zoomData: {
+        meetingId: meeting.meetingId,
+        password: meeting.password,
+        startTime: meeting.startTime,
+        settings: meeting.settings,
+      }
+    };
+    if (store.addContentItem) store.addContentItem(courseId, currentWeek.id, undefined, payload);
+    setShowZoomDialog(false);
+    refresh();
+  };
 
   if (!course) return (
     <div className="max-w-6xl mx-auto bg-white text-[#0f5a56] rounded-3xl shadow-xl p-6 md:p-8 border border-white/20">
@@ -107,8 +139,21 @@ export default function InstructorCourseEditor({ courseId }) {
           <div className="mt-4">
             <div className="flex items-center justify-between">
               <div className="font-semibold">{currentWeek.title}</div>
-              <button className="px-4 py-2 rounded-full bg-white/20 text-white text-sm" onClick={()=> setAddingItem(true)}>+ Add Content</button>
+              <button className="px-4 py-2 rounded-full bg-white/20 text-white text-sm" onClick={()=> setShowAddContentDialog(true)}>+ Add Content</button>
             </div>
+
+            <AddContentDialog 
+              open={showAddContentDialog} 
+              onClose={() => setShowAddContentDialog(false)}
+              onSelect={handleContentTypeSelect}
+            />
+
+            <ZoomMeetingDialog
+              open={showZoomDialog}
+              onClose={() => setShowZoomDialog(false)}
+              onSave={handleZoomSave}
+              courseTitle={course?.title}
+            />
 
             {/* Items list */}
             <div className="mt-3 space-y-2">
@@ -140,18 +185,24 @@ export default function InstructorCourseEditor({ courseId }) {
             {/* Add item form */}
             {addingItem && (
               <form onSubmit={onAddItem} className="mt-4 rounded-2xl border border-white/30 p-4 bg-white/10">
+                <div className="mb-3">
+                  <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-sm capitalize">
+                    Adding: {itemType}
+                  </span>
+                </div>
                 <div className="grid md:grid-cols-2 gap-3">
-                  <select className="px-3 py-2 rounded-xl border border-white/30 bg-white/10 text-white" value={itemType} onChange={e=>setItemType(e.target.value)}>
-                    {ITEM_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
-                  </select>
                   <input className="px-3 py-2 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/80" placeholder="Title" value={itemTitle} onChange={e=>setItemTitle(e.target.value)} />
-                  <input className="px-3 py-2 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/80" placeholder="Link (optional)" value={itemUrl} onChange={e=>setItemUrl(e.target.value)} />
-                  <input className="px-3 py-2 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/80" placeholder="Duration mins (optional)" value={itemDur} onChange={e=>setItemDur(e.target.value)} />
+                  {(itemType === 'url' || itemType === 'youtube' || itemType === 'lecture') && (
+                    <input className="px-3 py-2 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/80" placeholder={itemType === 'youtube' ? 'YouTube URL' : 'Link (optional)'} value={itemUrl} onChange={e=>setItemUrl(e.target.value)} />
+                  )}
+                  {itemType === 'lecture' && (
+                    <input className="px-3 py-2 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/80" placeholder="Duration mins (optional)" value={itemDur} onChange={e=>setItemDur(e.target.value)} />
+                  )}
                   <textarea className="md:col-span-2 px-3 py-2 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/80" placeholder="Description (optional)" value={itemDesc} onChange={e=>setItemDesc(e.target.value)} />
                 </div>
                 <div className="mt-3 flex gap-2">
                   <button type="submit" className="px-4 py-2 rounded-full bg-white/20 text-white">Add</button>
-                  <button type="button" className="px-4 py-2 rounded-full border border-white/30" onClick={()=> setAddingItem(false)}>Cancel</button>
+                  <button type="button" className="px-4 py-2 rounded-full border border-white/30" onClick={()=> { setAddingItem(false); setItemType('lecture'); setItemTitle(''); setItemDesc(''); setItemUrl(''); setItemDur(''); }}>Cancel</button>
                 </div>
               </form>
             )}

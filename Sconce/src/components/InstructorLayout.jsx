@@ -8,11 +8,7 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
     { id: 'home', label: 'Dashboard', icon: '📊', hash: '#/dashboard/instructor' },
     { id: 'courses', label: 'My Courses', icon: '📚', hash: '#/dashboard/instructor/courses' },
     { id: 'notebooks', label: 'AI Notebooks', icon: '🧠', hash: '#/dashboard/instructor/notebooks' },
-    { id: 'assessments', label: 'Exams & Assignments', icon: '✏️', hash: '#/dashboard/instructor/assessments' },
-    { id: 'grading', label: 'Grading', icon: '✅', hash: '#/dashboard/instructor/grading' },
     { id: 'messages', label: 'Messages', icon: '💬', hash: '#/dashboard/instructor/messages' },
-    { id: 'performance', label: 'Student Performance', icon: '📈', hash: '#/dashboard/instructor/performance' },
-    { id: 'payments', label: 'Payment Log', icon: '💳', hash: '#/dashboard/instructor/payments' },
     { id: 'schedule', label: 'Schedule', icon: '📅', hash: '#/dashboard/instructor/schedule' },
   ];
 
@@ -50,9 +46,9 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
         </div>
       </div>
 
-      <div className="grid grid-cols-[240px_1fr] gap-0">
+      <div className="grid grid-cols-[240px_1fr] gap-0 h-[calc(100vh-6rem)]">
         {/* Sidebar */}
-        <aside className="min-h-[calc(100vh-4rem)] bg-[#034141] text-white p-3">
+        <aside className="h-full bg-[#034141] text-white p-3 overflow-y-auto">
           <nav className="space-y-1">
             {menuItems.map(m => (
               <button key={m.id} onClick={()=> (window.location.hash = m.hash)} className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left ${active===m.id ? 'bg-[#58ACA9] text-white' : 'hover:bg-white/10 text-white/90'}`}>
@@ -64,7 +60,7 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
         </aside>
 
         {/* Main content area */}
-        <main className={`text-[#0f5a56] ${isNotebookView ? 'p-0 h-[calc(100vh-6rem)]' : 'p-6'}`} style={{ backgroundColor: isNotebookView ? '#ffffff' : '#F2F2F2' }}>
+        <main className={`text-[#0f5a56] h-full ${isNotebookView ? 'p-0 overflow-hidden' : 'p-6 overflow-y-auto'}`} style={{ backgroundColor: isNotebookView ? '#ffffff' : '#F2F2F2' }}>
           {children}
         </main>
       </div>

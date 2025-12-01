@@ -4,6 +4,69 @@ All notable changes to the Sconce frontend application will be documented in thi
 
 ## [Unreleased]
 
+### Added - December 1, 2025
+
+#### Instructor Dashboard Restructuring
+
+- **Streamlined Navigation**: Removed redundant tabs from instructor sidebar
+  - Removed "Exams & Assignments" - now integrated into course editor
+  - Removed "Grading" - will be integrated into specific content items
+  - Removed "Student Performance" - to be added as analytics feature later
+  - Removed "Payment Log" - moved to admin/manager dashboard
+  - Kept essential tabs: Dashboard, My Courses, AI Notebooks, Messages, Schedule
+
+- **Content Creation Dialog**: New modal for adding course content
+  - Component: `AddContentDialog.jsx`
+  - Visual grid layout inspired by Moodle's activity picker
+  - Content types available:
+    - URL Link (web resources)
+    - YouTube Video (embedded videos)
+    - Text Content (instructions, readings)
+    - Lecture (video lectures with duration)
+    - File Upload (PDFs, documents)
+    - Assignment (graded tasks)
+    - Quiz (interactive assessments)
+  - Search functionality to filter content types
+  - Icon-based cards with descriptions for each type
+
+- **Quiz Builder Integration**: Seamless quiz creation workflow
+  - Selecting "Quiz" in content dialog navigates to dedicated quiz builder
+  - Quiz builder receives context (courseId, weekId) via URL parameters
+  - Auto-creates quiz with unique ID when accessed from course
+  - "Back to Course" button to return to course editor
+  - Quiz data persists in localStorage with course association
+  - Route: `#/dashboard/instructor/quiz/<quizId>?course=<courseId>&week=<weekId>`
+
+- **Enhanced Course Editor**: Updated content management
+  - "Add Content" button opens new content dialog instead of dropdown
+  - Content type pre-selected when adding (no more type selector in form)
+  - Conditional form fields based on content type:
+    - URL/YouTube: Shows URL input field
+    - Lecture: Shows URL and duration fields
+    - Text/Assignment: Shows description only
+  - Improved UX with type indicator badge when adding content
+  - Quiz items link directly to quiz builder for editing
+
+- **Route Handling Updates**: Extended instructor store routing
+  - Added quiz builder route parsing in `instructorStore.js`
+  - Handles query parameters for course and week context
+  - Updated `parseInstructorHash` to support quiz routes
+  - Removed routes for deleted dashboard sections
+
+### Changed - December 1, 2025
+
+- **InstructorLayout**: Reduced sidebar menu items from 9 to 5 tabs
+- **InstructorDashboard**: Updated route handling to include quiz builder
+- **InstructorCourseEditor**: Replaced inline content type selector with dialog
+- **ExamsBuilder**: Now accepts props for course context and initial quiz ID
+
+### Removed - December 1, 2025
+
+- Standalone "Exams & Assignments" page (functionality moved to course editor)
+- "Grading" placeholder page
+- "Student Performance" placeholder page  
+- "Payment Log" placeholder page
+
 ### Added - November 24-25, 2025
 
 #### Email Verification System
