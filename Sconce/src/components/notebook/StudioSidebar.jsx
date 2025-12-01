@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Plus, ChevronRight, ChevronLeft, FileText } from 'lucide-react';
+import { Plus, ChevronRight, ChevronLeft, FileText, X } from 'lucide-react';
 import { useNotes } from '../../hooks/useNotes';
 import { useSources } from '../../hooks/useSources';
+import * as Dialog from '@radix-ui/react-dialog';
 
 export default function StudioSidebar({ notebookId, onCitationClick, isVisible, onToggle }) {
   const [loading, setLoading] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
   const { notes, isLoading, refetch } = useNotes(notebookId);
   const { sources } = useSources(notebookId);
   
@@ -116,7 +118,11 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
           ) : notes && notes.length > 0 ? (
             <div className="space-y-3">
               {notes.map(note => (
-                <div key={note.id} className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white">
+                <div 
+                  key={note.id} 
+                  onClick={() => setSelectedNote(note)}
+                  className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white transition-colors"
+                >
                   <h4 className="font-medium text-gray-900 truncate">{note.title}</h4>
                   <p className="text-sm text-gray-600 line-clamp-2 mt-1">
                     {note.content}
@@ -140,6 +146,38 @@ export default function StudioSidebar({ notebookId, onCitationClick, isVisible, 
           )}
         </div>
       </div>
+
+      {/* Note Viewer Dialog */}
+      <Dialog.Root open={!!selectedNote} onOpenChange={(open) => !open && setSelectedNote(null)}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 bg-black/50 z-50" />
+          <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[80vh] overflow-hidden z-50">
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <Dialog.Title className="text-lg font-semibold text-gray-900">
+                {selectedNote?.title}
+              </Dialog.Title>
+              <Dialog.Close className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                <X className="h-5 w-5 text-gray-500" />
+              </Dialog.Close>
+            </div>
+            <div className="p-6 overflow-y-auto max-h-[calc(80vh-80px)]">
+              <div className="prose prose-sm max-w-none">
+                <pre className="whitespace-pre-wrap font-sans text-gray-700 leading-relaxed">
+                  {selectedNote?.content}
+                </pre>
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <p className="text-sm text-gray-500">
+                  Created: {selectedNote && new Date(selectedNote.created_at).toLocaleString()}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Updated: {selectedNote && new Date(selectedNote.updated_at).toLocaleString()}
+                </p>
+              </div>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </div>
   );
 }
