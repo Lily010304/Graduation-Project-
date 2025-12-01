@@ -14,7 +14,7 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
   const [showCopiedTextDialog, setShowCopiedTextDialog] = useState(false);
   const [showMultipleWebsiteDialog, setShowMultipleWebsiteDialog] = useState(false);
   
-  const { addSourceAsync, updateSource } = useSources(notebookId);
+  const { sources, addSourceAsync, updateSource } = useSources(notebookId);
   const { uploadFile } = useFileUpload();
   const { processDocumentAsync } = useDocumentProcessing();
   const { generateNotebookContentAsync } = useNotebookGeneration();
@@ -47,7 +47,7 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
     }
   };
 
-  const processFileAsync = async (file, sourceId) => {
+  const processFileAsync = async (file, sourceId, isFirstSource) => {
     try {
       // Determine sourceType
       const sourceType = file.type.includes('pdf') ? 'pdf' : file.type.includes('audio') ? 'audio' : 'text';
@@ -62,8 +62,10 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
       // Kick off document processing (extract + upsert vector store)
       await processDocumentAsync({ sourceId, filePath, sourceType });
 
-      // Generate / update notebook metadata (title / description) based on first source only
-      await generateNotebookContentAsync({ notebookId, filePath, sourceType });
+      // Generate / update notebook metadata (title / description) ONLY if this is the first source
+      if (isFirstSource) {
+        await generateNotebookContentAsync({ notebookId, filePath, sourceType });
+      }
 
       // Mark completed (will later be replaced by webhook callback if implemented)
       await updateSource({ sourceId, updates: { processing_status: 'completed' } });
@@ -78,6 +80,10 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
     setIsProcessingLocal(true);
 
     try {
+      // Check if notebook already has sources
+      const existingSourceCount = sources?.length || 0;
+      const isFirstUpload = existingSourceCount === 0;
+
       // Create sources first (pending)
       const created = await Promise.all(files.map(async (file) => {
         const type = file.type.includes('pdf') ? 'pdf' : file.type.includes('audio') ? 'audio' : 'text';
@@ -93,9 +99,10 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
       // Close dialog quickly for UX
       onOpenChange(false);
 
-      // Process sequentially to avoid rate limits (first triggers notebook generation reliably)
+      // Process sequentially - only first file triggers notebook generation if it's the first upload
       for (let i = 0; i < created.length; i++) {
-        await processFileAsync(files[i], created[i].id);
+        const shouldGenerateNotebook = isFirstUpload && i === 0;
+        await processFileAsync(files[i], created[i].id, shouldGenerateNotebook);
       }
 
       setIsProcessingLocal(false);
@@ -110,6 +117,10 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
     setIsProcessingLocal(true);
 
     try {
+      // Check if notebook already has sources
+      const existingSourceCount = sources?.length || 0;
+      const isFirstSource = existingSourceCount === 0;
+
       const createdSource = await addSourceAsync({
         notebookId,
         title,
@@ -118,9 +129,13 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
         processing_status: 'pending',
       });
 
-      // Simulate filePath for text (none) - call notebook generation directly
       await updateSource({ sourceId: createdSource.id, updates: { processing_status: 'processing' } });
-      await generateNotebookContentAsync({ notebookId, sourceType: 'text' });
+      
+      // Only generate notebook content if this is the first source
+      if (isFirstSource) {
+        await generateNotebookContentAsync({ notebookId, sourceType: 'text' });
+      }
+      
       await updateSource({ sourceId: createdSource.id, updates: { processing_status: 'completed' } });
       onOpenChange(false);
     } finally {
@@ -133,6 +148,10 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
     setIsProcessingLocal(true);
 
     try {
+      // Check if notebook already has sources
+      const existingSourceCount = sources?.length || 0;
+      const isFirstUpload = existingSourceCount === 0;
+
       const created = await Promise.all(urls.map(async (url, idx) => {
         return await addSourceAsync({
           notebookId,
@@ -143,12 +162,17 @@ export default function AddSourcesDialog({ open, onOpenChange, notebookId }) {
         });
       }));
 
-      // Sequential processing (no file paths) just mark completed & generate notebook once
+      // Sequential processing (no file paths) just mark completed
       for (let i = 0; i < created.length; i++) {
         await updateSource({ sourceId: created[i].id, updates: { processing_status: 'processing' } });
         await updateSource({ sourceId: created[i].id, updates: { processing_status: 'completed' } });
       }
-      await generateNotebookContentAsync({ notebookId, sourceType: 'website' });
+      
+      // Only generate notebook content if this is the first upload
+      if (isFirstUpload) {
+        await generateNotebookContentAsync({ notebookId, sourceType: 'website' });
+      }
+      
       onOpenChange(false);
     } finally {
       setIsProcessingLocal(false);
