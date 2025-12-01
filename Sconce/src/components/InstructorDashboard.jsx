@@ -33,13 +33,13 @@ export default function InstructorDashboard() {
   }, [route]);
 
   return (
-    <InstructorLayout active={active}>
+    <InstructorLayout active={active} isNotebookView={route.view === 'notebook'}>
       {route.view === 'home' && <InstructorHomeDashboard />}
       {route.view === 'courses' && <InstructorCourseList />}
       {route.view === 'course' && <InstructorCourseEditor courseId={route.courseId} />}
       {route.view === 'assessments' && <ExamsBuilder />}
       {route.view === 'notebooks' && <InstructorNotebooks />}
-      {route.view === 'notebook' && <div className="h-full overflow-hidden bg-white"><NotebookPage notebookId={route.notebookId} /></div>}
+      {route.view === 'notebook' && <NotebookPage notebookId={route.notebookId} />}
       {route.view === 'grading' && <InstructorGradingPage />}
       {route.view === 'messages' && <InstructorMessagesPage />}
       {route.view === 'performance' && <InstructorPerformancePage />}

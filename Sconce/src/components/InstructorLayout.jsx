@@ -3,7 +3,7 @@ import '../index.css';
 // Match the main page gradient background
 const unifiedBackground = 'linear-gradient(to bottom right, #034242 0%, #ffffff 100%)';
 
-export default function InstructorLayout({ children, active }) {
+export default function InstructorLayout({ children, active, isNotebookView = false }) {
   const menuItems = [
     { id: 'home', label: 'Dashboard', icon: '📊', hash: '#/dashboard/instructor' },
     { id: 'courses', label: 'My Courses', icon: '📚', hash: '#/dashboard/instructor/courses' },
@@ -64,7 +64,7 @@ export default function InstructorLayout({ children, active }) {
         </aside>
 
         {/* Main content area */}
-        <main className="p-6 text-[#0f5a56]" style={{ backgroundColor: '#F2F2F2' }}>
+        <main className={`text-[#0f5a56] ${isNotebookView ? 'p-0 h-[calc(100vh-6rem)]' : 'p-6'}`} style={{ backgroundColor: isNotebookView ? '#ffffff' : '#F2F2F2' }}>
           {children}
         </main>
       </div>
