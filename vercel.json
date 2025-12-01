@@ -1,0 +1,7 @@
+{
+  "buildCommand": "cd Sconce && npm install && npm run build",
+  "outputDirectory": "Sconce/dist",
+  "installCommand": "cd Sconce && npm install",
+  "framework": null,
+  "devCommand": "cd Sconce && npm run dev"
+}
