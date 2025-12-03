@@ -51,11 +51,6 @@ export default function InstructorHomeDashboard() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Welcome Back, Instructor!</h1>
-        <p className="text-[#0f5a56]/70 text-sm">Here’s what’s on your plate today.</p>
-      </div>
-
       {/* Main layout: Courses on left, Timetable on right */}
       <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}>
         {/* LEFT SIDE: My Courses */}

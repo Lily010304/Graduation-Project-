@@ -46,23 +46,30 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
         </div>
       </div>
 
-      {/* Action Buttons Row */}
-      <div className="px-10 py-4 flex items-center justify-center gap-6">
-        <button
-          onClick={() => (window.location.hash = '#/dashboard/instructor/notebooks')}
-          className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#58ACA9] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
-        >
-          <span className="text-2xl">🧠</span>
-          <span>AI Notebooks</span>
-        </button>
+      {/* Action Buttons Row with Welcome Message */}
+      <div className="px-10 py-4 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">Welcome Back, Instructor!</h1>
+          <p className="text-white/70 text-sm">Here's what's on your plate today.</p>
+        </div>
         
-        <button
-          onClick={() => (window.location.hash = '#/dashboard/instructor/messages')}
-          className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#58ACA9] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
-        >
-          <span className="text-2xl">💬</span>
-          <span>Messages</span>
-        </button>
+        <div className="flex items-center gap-6">
+          <button
+            onClick={() => (window.location.hash = '#/dashboard/instructor/notebooks')}
+            className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#58ACA9] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
+          >
+            <span className="text-2xl">🧠</span>
+            <span>AI Notebooks</span>
+          </button>
+          
+          <button
+            onClick={() => (window.location.hash = '#/dashboard/instructor/messages')}
+            className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#58ACA9] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
+          >
+            <span className="text-2xl">💬</span>
+            <span>Messages</span>
+          </button>
+        </div>
       </div>
 
       {/* Main content area */}
