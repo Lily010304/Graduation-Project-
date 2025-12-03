@@ -57,7 +57,7 @@ export default function InstructorHomeDashboard() {
       </div>
 
       {/* Main layout: Courses on left, Timetable on right */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}>
         {/* LEFT SIDE: My Courses */}
         <div className="rounded-2xl bg-white p-5 border border-[#58ACA9]/30 shadow-sm">
           <div className="flex items-center justify-between mb-4">
@@ -162,36 +162,14 @@ export default function InstructorHomeDashboard() {
         </div>
       </div>
 
-      {/* Secondary row: To-Do List and other widgets */}
+      {/* Secondary row: Submissions and Stats */}
       <div className="grid md:grid-cols-2 gap-4">
-        <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
-          <div className="font-semibold mb-2">To-Do List</div>
-          <ul className="text-sm space-y-1">
-            {todos.map(t => (
-              <li key={t.id} className="flex items-center gap-2">
-                <input type="checkbox" />
-                <span>{t.text}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
         <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
           <div className="font-semibold mb-2">Recent Student Submissions</div>
           <ul className="text-sm space-y-1">
             {submissions.map(s => <li key={s.id}>{s.label}</li>)}
           </ul>
           <button className="mt-3 text-sm underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/grading')}>View All Submissions</button>
-        </div>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
-          <div className="font-semibold mb-2">Unread Messages (2)</div>
-          <ul className="text-sm space-y-1">
-            {messages.map(m => <li key={m.id}>- {m.from}: "{m.text}"</li>)}
-          </ul>
-          <button className="mt-3 text-sm underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/messages')}>View All Messages</button>
         </div>
 
         <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
