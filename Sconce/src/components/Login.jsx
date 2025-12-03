@@ -49,6 +49,30 @@ export default function Login() {
       return;
     }
 
+    // DEV MODE: Skip authentication for testing (remove in production!)
+    if (email === 'dev' && password === 'dev') {
+      console.log('🚀 DEV MODE: Bypassing authentication');
+      localStorage.setItem('userRole', role);
+      localStorage.setItem('authToken', 'dev-token-bypass');
+      localStorage.setItem('userData', JSON.stringify({ 
+        email: 'dev@sconce.com', 
+        fullName: 'Dev User',
+        role: role 
+      }));
+      
+      // Redirect based on role
+      if (role === 'manager') {
+        window.location.hash = '#/manager';
+      } else if (role === 'student') {
+        window.location.hash = '#/dashboard/student';
+      } else if (role === 'instructor') {
+        window.location.hash = '#/dashboard/instructor';
+      } else if (role === 'parent') {
+        window.location.hash = '#/dashboard/parent';
+      }
+      return;
+    }
+
     setIsLoading(true);
 
     try {
