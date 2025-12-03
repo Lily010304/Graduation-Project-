@@ -50,7 +50,7 @@ export default function Login() {
     }
 
     // DEV MODE: Skip authentication for testing (remove in production!)
-    if (email === 'dev' && password === 'dev') {
+    if (email === 'dev@example.com' && password === 'dev') {
       console.log('🚀 DEV MODE: Bypassing authentication');
       localStorage.setItem('userRole', role);
       localStorage.setItem('authToken', 'dev-token-bypass');
