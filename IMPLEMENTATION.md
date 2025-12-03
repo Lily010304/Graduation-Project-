@@ -172,6 +172,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   - File storage
   - Edge Functions (serverless)
   - Vector database queries
+  - Third-party API integrations (Zoom)
 
 ---
 
@@ -190,10 +191,15 @@ Sconce/src/
 │   │   ├── SourcesSidebar.jsx
 │   │   ├── StudioSidebar.jsx
 │   │   └── SourceContentViewer.jsx
+│   ├── instructor/         # Instructor-specific components
+│   │   ├── AddContentDialog.jsx
+│   │   ├── ZoomMeetingDialog.jsx
+│   │   └── ExamsBuilder.jsx
 │   ├── EmailConfirmation.jsx
 │   ├── Login.jsx
 │   ├── StudentRegister.jsx
-│   └── InstructorDashboard.jsx
+│   ├── InstructorDashboard.jsx
+│   └── InstructorCourseEditor.jsx
 ├── hooks/                  # Custom React hooks
 │   ├── useChatMessages.js
 │   ├── useNotebooks.js
@@ -202,7 +208,9 @@ Sconce/src/
 │   ├── useFileUpload.js
 │   └── useDocumentProcessing.js
 ├── lib/
-│   └── supabase.js        # Supabase client configuration
+│   ├── supabase.js        # Supabase client configuration
+│   ├── api.js             # Backend API client (ASP.NET Core)
+│   └── instructorStore.js # Course management state
 ├── App.jsx                # Main app with routing
 └── main.jsx               # Entry point
 ```
@@ -239,6 +247,9 @@ function AppContent() {
 - `#/confirm-email` → Email confirmation
 - `#/dashboard/student` → Student dashboard
 - `#/dashboard/instructor` → Instructor dashboard
+- `#/dashboard/instructor/courses` → Course list
+- `#/dashboard/instructor/course/:id` → Course editor
+- `#/dashboard/instructor/quiz/:id` → Quiz builder
 - `#/notebook/:id` → Notebook workspace
 
 ### 3.3 Custom Hooks
@@ -446,6 +457,55 @@ export const useFileUpload = () => {
 
 ### 3.4 Key Components
 
+#### Login.jsx
+**Purpose**: User authentication interface
+
+**Features**:
+- Role-based login (Student, Instructor, Parent, Manager)
+- Integration with backend API via `src/lib/api.js`
+- JWT token management (automatic storage)
+- Loading states during authentication
+- Error message display for failed attempts
+- Role-specific redirects after successful login
+
+**Authentication Flow**:
+```javascript
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  
+  try {
+    // Call backend API
+    const response = await login(email, password);
+    
+    // Token automatically stored by api.js
+    localStorage.setItem('userRole', role);
+    
+    // Redirect based on role
+    if (role === 'student') window.location.hash = '#/dashboard/student';
+    else if (role === 'instructor') window.location.hash = '#/dashboard/instructor';
+    // etc.
+  } catch (err) {
+    setError(err.message || 'Login failed');
+  } finally {
+    setIsLoading(false);
+  }
+};
+```
+
+**State Management**:
+- `email`, `password` - Form inputs
+- `role` - Selected user role (student/instructor/parent/manager)
+- `isLoading` - Button disabled during API call
+- `error` - Error message display
+- `showPwd` - Password visibility toggle
+
+**Error Handling**:
+- Network errors caught and displayed
+- Invalid credentials show user-friendly message
+- Form inputs disabled during submission
+- Red alert box for error display
+
 #### NotebookPage.jsx
 **Purpose**: Main three-column notebook workspace
 
@@ -625,14 +685,110 @@ const handleFileUpload = async (files) => {
 
 **URL**: `https://sconce.runasp.net`
 
-**Purpose**: Authentication and user management
+**Purpose**: Authentication, user management, and LMS core functionality
 
-**Endpoints**:
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/verify-email` - Email verification
-- `GET /api/users/profile` - Get user profile
-- `PUT /api/users/profile` - Update user profile
+#### API Client (`src/lib/api.js`)
+
+**Purpose**: Centralized service for all backend API calls
+
+**Key Features**:
+- **Automatic Authentication**: Includes JWT token in all requests
+- **Token Management**: Stores and retrieves auth token from localStorage
+- **Error Handling**: Unified error catching with detailed logging
+- **Type Safety**: JSDoc comments for all functions
+- **Response Parsing**: Handles both JSON and text responses
+
+**Configuration**:
+```javascript
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://sconce.runasp.net';
+```
+
+**Generic Request Handler**:
+```javascript
+const apiRequest = async (endpoint, options = {}) => {
+  const url = `${API_BASE_URL}${endpoint}`;
+  const token = localStorage.getItem('authToken');
+  
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'text/plain',
+      ...(token && { 'Authorization': `Bearer ${token}` }),
+      ...options.headers,
+    },
+    ...options,
+  };
+  
+  const response = await fetch(url, config);
+  // Handle errors and parse response
+};
+```
+
+**Authentication Endpoints**:
+- `POST /api/Identity/Account/Login` - User login with credentials
+- `GET /api/Identity/Account/ConfirmEmail` - Email verification
+- `POST /api/Identity/Account/ForgotPassword` - Password reset request
+- `PATCH /api/Identity/Account/ResetPassword` - Reset password with code
+
+**Student Endpoints**:
+- `POST /api/Student/Account/RegisterStudent` - Student registration
+- `GET /api/Student/Account/ApproveParentLink` - Approve parent-student link
+- `POST /api/Student/Application/Apply` - Submit application (multipart/form-data)
+- `GET /api/Student/Application/Status` - Check application status
+
+**Parent Endpoints**:
+- `POST /api/Parent/Account/RegisterParent` - Register parent (send invite)
+- `POST /api/Parent/Account/RegisterParentWithInvite` - Register with token
+
+**Instructor Endpoints**:
+- `POST /api/Instructor/Application/Apply` - Submit application with CV
+- `GET /api/Instructor/Application/Status` - Check application status
+
+**Admin Endpoints**:
+- `GET /api/Admin/Course` - List courses
+- `POST /api/Admin/Course` - Create course
+- `GET /api/Admin/Program` - List programs
+- `POST /api/Admin/Program` - Create program
+- `GET /api/Admin/Section` - List sections
+- `POST /api/Admin/Section` - Create section
+- `GET /api/Admin/Instructor/Applications` - List instructor applications
+- `GET /api/Admin/Instructor/Applications/:id` - Get application details
+- `GET /api/Admin/Student/Applications` - List student applications
+- `GET /api/Admin/Student/Applications/:id` - Get application details
+
+**Utility Functions**:
+```javascript
+// Login and store token
+export const login = async (email, password) => {
+  const response = await apiRequest('/api/Identity/Account/Login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+  });
+  
+  if (response.token) localStorage.setItem('authToken', response.token);
+  if (response.user) localStorage.setItem('userData', JSON.stringify(response.user));
+  
+  return response;
+};
+
+// Logout and clear session
+export const logout = () => {
+  localStorage.removeItem('authToken');
+  localStorage.removeItem('userData');
+  window.location.hash = '#/login';
+};
+
+// Get current user
+export const getCurrentUser = () => {
+  const userData = localStorage.getItem('userData');
+  return userData ? JSON.parse(userData) : null;
+};
+
+// Check authentication status
+export const isAuthenticated = () => {
+  return !!localStorage.getItem('authToken');
+};
+```
 
 **CORS Configuration**: Allows `http://localhost:5173` (development)
 
@@ -711,6 +867,19 @@ const handleFileUpload = async (files) => {
      2. Generate public file URL
      3. Call n8n extraction workflow
      4. Update source status in database
+
+4. **create-zoom-meeting**
+   - **Path**: `/functions/v1/create-zoom-meeting`
+   - **Purpose**: Create Zoom meetings via Zoom API for live class sessions
+   - **Authentication**: Server-to-Server OAuth
+   - **Flow**:
+     1. Receive meeting details (topic, startTime, duration, settings)
+     2. Retrieve Zoom credentials from Edge Function secrets
+     3. Obtain OAuth access token from Zoom API
+     4. Create scheduled meeting via Zoom API
+     5. Return meeting details (joinUrl, meetingId, password)
+   - **Integration**: Meeting data saved as course content items
+   - **Security**: API credentials stored in Supabase secrets (never exposed to frontend)
 
 ---
 
@@ -1285,22 +1454,43 @@ POST http://localhost:11434/api/embeddings
 **Registration**:
 ```
 1. User fills form (name, email, password, role)
-2. POST to ASP.NET API: /api/auth/register
-3. Backend creates user in SQL Server
-4. Sends verification email
-5. User clicks link → /api/auth/verify-email?token=...
-6. Account activated
-7. Redirect to login
+2. Frontend calls registerStudent() or registerParent() from api.js
+3. POST to ASP.NET API: /api/Student/Account/RegisterStudent
+4. Backend creates user in database
+5. Sends verification email
+6. User clicks link → /api/Identity/Account/ConfirmEmail?token={token}&userID={userID}
+7. Frontend (EmailConfirmation.jsx) calls confirmEmail()
+8. Account activated
+9. Redirect to login page
 ```
 
 **Login**:
 ```
-1. User enters credentials
-2. POST to /api/auth/login
-3. Backend validates against SQL Server
-4. Returns JWT + user data
-5. Frontend stores in localStorage
-6. Redirect to dashboard
+1. User enters credentials in Login.jsx
+2. Form submits → handleSubmit() called
+3. Frontend calls login(email, password) from api.js
+4. API sends POST to /api/Identity/Account/Login
+5. Backend validates against database
+6. Returns JWT token + user data as JSON
+7. api.js stores token in localStorage.authToken
+8. api.js stores user data in localStorage.userData
+9. Frontend stores role in localStorage.userRole
+10. Redirect to role-specific dashboard:
+    - Student → #/dashboard/student
+    - Instructor → #/dashboard/instructor
+    - Parent → #/dashboard/parent
+    - Manager → #/manager
+```
+
+**Token Usage in Subsequent Requests**:
+```javascript
+// Every API call automatically includes token
+const config = {
+  headers: {
+    'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+    'Content-Type': 'application/json',
+  }
+};
 ```
 
 ### 8.2 Create Notebook
@@ -1542,6 +1732,13 @@ POST http://localhost:11434/api/embeddings
 - Local Ollama server (port 11434)
 - Requires: Docker or native installation
 
+**Zoom Integration**:
+- API Type: Server-to-Server OAuth
+- Credentials: Stored in Supabase Edge Function secrets
+- Scopes: `meeting:write:admin`, `meeting:read:admin`, `user:read:admin`
+- Meeting Creation: Server-side via Edge Function
+- Security: No credentials exposed to frontend
+
 ### Production Considerations
 
 **Scaling**:
@@ -1550,6 +1747,7 @@ POST http://localhost:11434/api/embeddings
 - Supabase: Auto-scales (managed)
 - n8n: Queue-based processing for high load
 - Ollama: GPU acceleration for faster inference
+- Zoom: Rate limits managed server-side
 
 **Monitoring**:
 - Frontend: Error tracking (Sentry)
@@ -1557,11 +1755,73 @@ POST http://localhost:11434/api/embeddings
 - Supabase: Built-in monitoring
 - n8n: Workflow execution logs
 - Ollama: System resource monitoring
+- Zoom: API usage tracking via Edge Function logs
 
 **Backup**:
 - Database: Daily automated backups
 - Files: S3 versioning
 - Vector embeddings: Periodic snapshots
+- Zoom meeting records: Stored as course content metadata
+
+---
+
+## 11. Third-Party Integrations
+
+### 11.1 Zoom Video Conferencing
+
+**Purpose**: Enable live virtual class sessions within courses
+
+**Architecture**:
+- **Frontend Component**: `ZoomMeetingDialog.jsx` - Meeting configuration UI
+- **Backend**: Supabase Edge Function (`create-zoom-meeting`)
+- **API**: Zoom REST API v2 with Server-to-Server OAuth
+
+**Meeting Creation Flow**:
+1. Instructor fills meeting form (topic, date/time, duration, settings)
+2. Frontend calls Edge Function with meeting parameters
+3. Edge Function authenticates with Zoom using stored credentials
+4. Zoom API creates scheduled meeting and returns details
+5. Meeting data (join URL, ID, password) saved as course content
+6. Students access meeting via "Join Meeting" button in course
+
+**Meeting Data Structure**:
+```json
+{
+  "type": "zoom",
+  "title": "Week 1 Live Session",
+  "url": "https://zoom.us/j/1234567890?pwd=...",
+  "durationMins": 60,
+  "zoomData": {
+    "meetingId": "1234567890",
+    "password": "abc123",
+    "startTime": "2025-12-05T18:00:00Z",
+    "settings": {
+      "waitingRoom": true,
+      "joinBeforeHost": false,
+      "muteUponEntry": true
+    }
+  }
+}
+```
+
+**Security Features**:
+- OAuth credentials stored in Supabase secrets (never in frontend)
+- Server-side API calls prevent credential exposure
+- Meeting passwords optional but recommended
+- Waiting room enabled by default
+- Host controls via Zoom dashboard
+
+**Instructor Features**:
+- "Start Meeting" button opens Zoom as host
+- Meeting details displayed (ID, password, start time)
+- Edit/delete meetings via course editor
+- View meeting settings and participants (future)
+
+**Student Features**:
+- "Join Meeting" button as participant
+- Wait in waiting room until host admits
+- Access meeting ID and password if needed
+- Meeting starts when instructor joins
 
 ---
 
@@ -1574,5 +1834,6 @@ This implementation leverages modern web technologies with local AI processing t
 - **AI Engine**: n8n + Ollama for local LLM processing
 - **Real-time**: Supabase subscriptions for live updates
 - **Vector Search**: pgvector for semantic retrieval
+- **Video Conferencing**: Zoom API integration for live classes
 
-All components work together seamlessly through well-defined APIs and webhook integrations, ensuring scalability and maintainability.
+All components work together seamlessly through well-defined APIs and webhook integrations, with third-party services (like Zoom) integrated securely via serverless functions, ensuring scalability, security, and maintainability.

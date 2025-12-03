@@ -4,6 +4,41 @@ All notable changes to the Sconce frontend application will be documented in thi
 
 ## [Unreleased]
 
+### Added - December 3, 2025
+
+#### Backend API Integration - Login Endpoint
+
+- **API Client Module**: Created centralized API service (`src/lib/api.js`)
+  - Complete wrapper for all backend endpoints
+  - Automatic JWT token management (storage and inclusion in requests)
+  - Unified error handling with detailed logging
+  - Support for all endpoint types: Identity, Student, Parent, Instructor, Admin
+  - Generic `apiRequest` function for DRY code
+  - Helper functions: `login`, `logout`, `getCurrentUser`, `isAuthenticated`
+
+- **Login Component Integration**: Connected Login.jsx to backend API
+  - Replaced placeholder auth with actual API call to `POST /api/Identity/Account/Login`
+  - Added loading state during authentication
+  - Error message display for failed login attempts
+  - Automatic token storage in localStorage upon successful login
+  - Role-based redirect after authentication
+  - Disabled form inputs during submission
+  - User data persistence for session management
+
+- **Authentication Flow**:
+  1. User enters credentials (email, password, role)
+  2. Frontend calls `login(email, password)` from API client
+  3. API sends POST request to `https://sconce.runasp.net/api/Identity/Account/Login`
+  4. Backend validates credentials and returns JWT token + user data
+  5. Frontend stores token and user data in localStorage
+  6. User redirected to role-specific dashboard
+
+- **Error Handling**:
+  - Network errors caught and displayed to user
+  - Invalid credentials show clear error message
+  - Console logging for debugging
+  - Non-blocking error display (red alert box)
+
 ### Added - December 1, 2025
 
 #### Instructor Dashboard Restructuring
@@ -160,6 +195,7 @@ All notable changes to the Sconce frontend application will be documented in thi
 ## Integration Points
 
 ### Backend API Endpoints Used
+- `POST /api/Identity/Account/Login` - User authentication (Student, Instructor, Parent, Manager)
 - `POST /api/Student/Account/RegisterStudent` - Student registration
 - `GET /api/Identity/Account/ConfirmEmail?token={token}&userID={userID}` - Email verification
 

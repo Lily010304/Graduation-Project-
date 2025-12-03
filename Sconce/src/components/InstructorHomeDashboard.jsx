@@ -56,32 +56,79 @@ export default function InstructorHomeDashboard() {
         <p className="text-[#0f5a56]/70 text-sm">Here’s what’s on your plate today.</p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        {/* Timetable card */}
+      {/* Main layout: Courses on left, Timetable on right */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* LEFT SIDE: My Courses */}
+        <div className="rounded-2xl bg-white p-5 border border-[#58ACA9]/30 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold text-[#0f5a56]">My Courses</h2>
+            <button 
+              className="text-sm text-[#58ACA9] hover:underline font-medium"
+              onClick={()=> (window.location.hash = '#/dashboard/instructor/courses')}
+            >
+              View All →
+            </button>
+          </div>
+          
+          {courseOverview.length === 0 ? (
+            <div className="text-sm text-[#0f5a56]/70">No courses assigned yet.</div>
+          ) : (
+            <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+              {courseOverview.slice(0, 6).map(co => (
+                <div 
+                  key={co.id} 
+                  className="rounded-xl border border-[#58ACA9]/20 p-4 bg-gradient-to-br from-[#58ACA9]/5 to-[#58ACA9]/10 hover:shadow-md transition-shadow cursor-pointer"
+                  onClick={()=> (window.location.hash = `#/dashboard/instructor/course/${co.id}`)}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-[#0f5a56] text-base mb-1">{co.title}</h3>
+                      <p className="text-xs text-[#0f5a56]/70">{co.level}</p>
+                    </div>
+                    <div className="text-xs bg-[#58ACA9] text-white px-3 py-1 rounded-full">
+                      {co.students}/30
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#58ACA9]/20">
+                    <div className="text-xs text-[#0f5a56]/70">
+                      Avg. Grade: <span className="font-semibold text-[#0f5a56]">{co.avg}%</span>
+                    </div>
+                    <button className="text-xs text-[#58ACA9] hover:underline font-medium">
+                      Manage →
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT SIDE: Timetable (Half width) */}
         <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
           <div className="flex items-start justify-between mb-3">
             <div>
               <div className="text-lg font-semibold">Timetable</div>
               <div className="text-xs text-white/90">{new Date().toLocaleDateString(undefined, { weekday: 'long', day: '2-digit', month: 'short', year: 'numeric' })}</div>
             </div>
-            <div className="text-[12px] px-3 py-1 rounded-full bg-white/20 border border-white/30 flex items-center gap-1">
+            <div className="text-[11px] px-2 py-1 rounded-full bg-white/20 border border-white/30 flex items-center gap-1">
               <span>{new Date().toLocaleDateString(undefined, { day: '2-digit', month: '2-digit', year: 'numeric' })}</span>
               <span role="img" aria-label="calendar">📅</span>
             </div>
           </div>
 
-          {/* Hour rows */}
-          <div className="space-y-3">
+          {/* Hour rows - Compact version */}
+          <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
             {['08:00','09:00','10:00','11:00','12:00'].map((hour, idx) => (
               <div key={hour} className="">
-                <div className="text-xs mb-1">{hour.replace(':00','')}.0 a.m</div>
+                <div className="text-[11px] mb-1 font-medium">{hour.replace(':00','')}.0 a.m</div>
                 <div className="relative pl-2">
                   <div className="border-t border-dashed border-white/30 absolute left-0 right-0 top-2" />
-                  <div className="relative space-y-2">
+                  <div className="relative space-y-1">
                     {timetable.filter(ev => (ev.start||'').slice(0,2) === hour.slice(0,2)).map((ev, i) => (
                       <div key={i} className="flex items-start">
-                        {/* Event pill */}
-                        <div className="flex-1 rounded-xl shadow-sm border border-white/20 overflow-hidden" style={{ background: (
+                        {/* Event pill - Compact */}
+                        <div className="flex-1 rounded-lg shadow-sm border border-white/20 overflow-hidden" style={{ background: (
                           ev.color==='green' ? '#E8F8E6' :
                           ev.color==='pink' ? '#FCE1EA' :
                           ev.color==='yellow' ? '#FFF4C2' :
@@ -89,13 +136,13 @@ export default function InstructorHomeDashboard() {
                           ev.color==='red' ? '#FFD9D9' :
                           '#E3F0FF'
                         ) }}>
-                          <div className="flex items-center gap-2 px-3 py-2">
-                            <div className="w-7 h-7 rounded-full grid place-items-center text-[13px]" style={{ background: 'rgba(255,255,255,0.8)' }}>
+                          <div className="flex items-center gap-2 px-2 py-1.5">
+                            <div className="w-6 h-6 rounded-full grid place-items-center text-[12px]" style={{ background: 'rgba(255,255,255,0.8)' }}>
                               <span>{ev.icon || '📘'}</span>
                             </div>
-                            <div className="min-w-0">
-                              <div className="text-[13px] font-semibold text-slate-700 truncate">{ev.title}</div>
-                              <div className="text-[11px] text-slate-600">{ev.start} - {ev.end} a.m</div>
+                            <div className="min-w-0 flex-1">
+                              <div className="text-[11px] font-semibold text-slate-700 truncate">{ev.title}</div>
+                              <div className="text-[10px] text-slate-600">{ev.start} - {ev.end}</div>
                             </div>
                           </div>
                         </div>
@@ -103,7 +150,7 @@ export default function InstructorHomeDashboard() {
                     ))}
                     {/* Spacer if no event at this hour */}
                     {timetable.filter(ev => (ev.start||'').slice(0,2) === hour.slice(0,2)).length === 0 && (
-                      <div className="text-[11px] text-white/70">—</div>
+                      <div className="text-[10px] text-white/70">—</div>
                     )}
                   </div>
                 </div>
@@ -111,9 +158,12 @@ export default function InstructorHomeDashboard() {
             ))}
           </div>
 
-          <button className="mt-4 text-sm underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/schedule')}>View Full Calendar</button>
+          <button className="mt-3 text-xs underline hover:no-underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/schedule')}>View Full Calendar</button>
         </div>
+      </div>
 
+      {/* Secondary row: To-Do List and other widgets */}
+      <div className="grid md:grid-cols-2 gap-4">
         <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
           <div className="font-semibold mb-2">To-Do List</div>
           <ul className="text-sm space-y-1">
@@ -125,9 +175,7 @@ export default function InstructorHomeDashboard() {
             ))}
           </ul>
         </div>
-      </div>
 
-      <div className="grid md:grid-cols-2 gap-4">
         <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
           <div className="font-semibold mb-2">Recent Student Submissions</div>
           <ul className="text-sm space-y-1">
@@ -135,7 +183,9 @@ export default function InstructorHomeDashboard() {
           </ul>
           <button className="mt-3 text-sm underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/grading')}>View All Submissions</button>
         </div>
+      </div>
 
+      <div className="grid md:grid-cols-2 gap-4">
         <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
           <div className="font-semibold mb-2">Unread Messages (2)</div>
           <ul className="text-sm space-y-1">
@@ -143,23 +193,23 @@ export default function InstructorHomeDashboard() {
           </ul>
           <button className="mt-3 text-sm underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/messages')}>View All Messages</button>
         </div>
-      </div>
 
-      <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
-        <div className="font-semibold mb-2">Course Overview</div>
-        <div className="space-y-1 text-sm">
-          {courseOverview.map(co => (
-            <div key={co.id} className="flex items-center justify-between">
-              <div>
-                <div className="font-semibold">{co.title}</div>
-                <div className="text-xs text-white/90">{co.level} • {co.students}/30 Students</div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="text-xs text-white/90">Avg. Grade: {co.avg}%</div>
-                <button className="text-sm underline" onClick={()=> (window.location.hash = `#/dashboard/instructor/course/${co.id}`)}>Manage Course</button>
-              </div>
+        <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
+          <div className="font-semibold mb-2">Quick Stats</div>
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-white/90">Total Courses:</span>
+              <span className="font-semibold">{courseOverview.length}</span>
             </div>
-          ))}
+            <div className="flex justify-between">
+              <span className="text-white/90">Total Students:</span>
+              <span className="font-semibold">{courseOverview.reduce((sum, c) => sum + c.students, 0)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-white/90">Pending Submissions:</span>
+              <span className="font-semibold">{submissions.length}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

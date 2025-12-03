@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../index.css';
+import { login } from '../lib/api';
 
 const unifiedBackground = 'linear-gradient(to bottom right, #034242 0%, #ffffff 100%)';
 
@@ -8,11 +9,14 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPwd, setShowPwd] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // reset fields when role changes if needed
     setEmail('');
     setPassword('');
+    setError('');
   }, [role]);
 
   useEffect(() => {
@@ -36,23 +40,43 @@ export default function Login() {
     return () => window.removeEventListener('hashchange', applyRoleFromHash);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Placeholder auth logic. Wire to backend later.
-    if (!email || !password) return alert('Please enter email and password');
-    if (role === 'manager') {
-      window.location.hash = '#/manager';
+    setError('');
+    
+    if (!email || !password) {
+      setError('Please enter email and password');
       return;
     }
-    if (role === 'student') {
-      window.location.hash = '#/dashboard/student';
-      return;
+
+    setIsLoading(true);
+
+    try {
+      // Call backend API
+      const response = await login(email, password);
+      
+      // Success - API stores token in localStorage
+      console.log('Login successful:', response);
+      
+      // Store role in localStorage for routing
+      localStorage.setItem('userRole', role);
+      
+      // Redirect based on role
+      if (role === 'manager') {
+        window.location.hash = '#/manager';
+      } else if (role === 'student') {
+        window.location.hash = '#/dashboard/student';
+      } else if (role === 'instructor') {
+        window.location.hash = '#/dashboard/instructor';
+      } else if (role === 'parent') {
+        window.location.hash = '#/dashboard/parent';
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError(err.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setIsLoading(false);
     }
-    if (role === 'instructor') {
-      window.location.hash = '#/dashboard/instructor';
-      return;
-    }
-    alert(`${role} login coming soon`);
   };
 
   return (
@@ -95,19 +119,26 @@ export default function Login() {
 
           {role === 'manager' || role === 'student' || role === 'instructor' ? (
             <form onSubmit={handleSubmit} className="space-y-4">
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
               <div>
                 <label className="block text-sm text-gray-600 mb-1">Email</label>
-                <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="w-full bg-transparent border-b border-gray-300 focus:border-[#0f5a56] outline-none py-2" placeholder={role==='student' ? 'student@example.com' : role==='instructor' ? 'instructor@example.com' : 'manager@example.com'} required />
+                <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="w-full bg-transparent border-b border-gray-300 focus:border-[#0f5a56] outline-none py-2" placeholder={role==='student' ? 'student@example.com' : role==='instructor' ? 'instructor@example.com' : 'manager@example.com'} required disabled={isLoading} />
               </div>
               <div>
                 <label className="block text-sm text-gray-600 mb-1">Password</label>
                 <div className="flex items-center gap-2 border-b border-gray-300 focus-within:border-[#0f5a56] py-2">
-                  <input type={showPwd? 'text':'password'} value={password} onChange={(e)=>setPassword(e.target.value)} className="flex-1 bg-transparent outline-none" required />
-                  <button type="button" className="text-xs text-[#0f5a56]/80" onClick={()=>setShowPwd(s=>!s)}>{showPwd ? 'Hide' : 'Show'}</button>
+                  <input type={showPwd? 'text':'password'} value={password} onChange={(e)=>setPassword(e.target.value)} className="flex-1 bg-transparent outline-none" required disabled={isLoading} />
+                  <button type="button" className="text-xs text-[#0f5a56]/80" onClick={()=>setShowPwd(s=>!s)} disabled={isLoading}>{showPwd ? 'Hide' : 'Show'}</button>
                 </div>
               </div>
               <div className="pt-2">
-                <button type="submit" className="w-full inline-flex items-center justify-center px-5 py-3 rounded-full bg-[#58ACA9] text-white font-semibold hover:brightness-95 transition">{role==='student' ? 'Log in as Student' : role==='instructor' ? 'Log in as Instructor' : 'Log in as Manager'}</button>
+                <button type="submit" className="w-full inline-flex items-center justify-center px-5 py-3 rounded-full bg-[#58ACA9] text-white font-semibold hover:brightness-95 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled={isLoading}>
+                  {isLoading ? 'Signing in...' : (role==='student' ? 'Log in as Student' : role==='instructor' ? 'Log in as Instructor' : 'Log in as Manager')}
+                </button>
               </div>
               {role !== 'manager' && (() => { try { return localStorage.getItem('recruitmentOpen') === 'true' || role !== 'instructor'; } catch { return role !== 'instructor'; } })() && (
                  <div className="text-center text-xs text-[#0f5a56]/70 mt-3">
