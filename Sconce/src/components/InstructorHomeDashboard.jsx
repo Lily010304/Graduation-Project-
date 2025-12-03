@@ -162,33 +162,13 @@ export default function InstructorHomeDashboard() {
         </div>
       </div>
 
-      {/* Secondary row: Submissions and Stats */}
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
-          <div className="font-semibold mb-2">Recent Student Submissions</div>
-          <ul className="text-sm space-y-1">
-            {submissions.map(s => <li key={s.id}>{s.label}</li>)}
-          </ul>
-          <button className="mt-3 text-sm underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/grading')}>View All Submissions</button>
-        </div>
-
-        <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
-          <div className="font-semibold mb-2">Quick Stats</div>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-white/90">Total Courses:</span>
-              <span className="font-semibold">{courseOverview.length}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/90">Total Students:</span>
-              <span className="font-semibold">{courseOverview.reduce((sum, c) => sum + c.students, 0)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/90">Pending Submissions:</span>
-              <span className="font-semibold">{submissions.length}</span>
-            </div>
-          </div>
-        </div>
+      {/* Recent Submissions */}
+      <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30 max-w-2xl">
+        <div className="font-semibold mb-2">Recent Student Submissions</div>
+        <ul className="text-sm space-y-1">
+          {submissions.map(s => <li key={s.id}>{s.label}</li>)}
+        </ul>
+        <button className="mt-3 text-sm underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/grading')}>View All Submissions</button>
       </div>
     </div>
   );

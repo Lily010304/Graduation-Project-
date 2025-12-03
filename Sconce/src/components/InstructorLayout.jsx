@@ -46,24 +46,29 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
         </div>
       </div>
 
-      <div className="grid grid-cols-[240px_1fr] gap-0 h-[calc(100vh-6rem)]">
-        {/* Sidebar */}
-        <aside className="h-full bg-[#034141] text-white p-3 overflow-y-auto">
-          <nav className="space-y-1">
-            {menuItems.map(m => (
-              <button key={m.id} onClick={()=> (window.location.hash = m.hash)} className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-left ${active===m.id ? 'bg-[#58ACA9] text-white' : 'hover:bg-white/10 text-white/90'}`}>
-                <span className="text-lg leading-none">{m.icon}</span>
-                <span className="text-sm">{m.label}</span>
-              </button>
-            ))}
-          </nav>
-        </aside>
-
-        {/* Main content area */}
-        <main className={`text-[#0f5a56] h-full ${isNotebookView ? 'p-0 overflow-hidden' : 'p-6 overflow-y-auto'}`} style={{ backgroundColor: isNotebookView ? '#ffffff' : '#F2F2F2' }}>
-          {children}
-        </main>
+      {/* Action Buttons Row */}
+      <div className="px-10 py-4 flex items-center justify-center gap-6">
+        <button
+          onClick={() => (window.location.hash = '#/dashboard/instructor/notebooks')}
+          className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#58ACA9] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
+        >
+          <span className="text-2xl">🧠</span>
+          <span>AI Notebooks</span>
+        </button>
+        
+        <button
+          onClick={() => (window.location.hash = '#/dashboard/instructor/messages')}
+          className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#58ACA9] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
+        >
+          <span className="text-2xl">💬</span>
+          <span>Messages</span>
+        </button>
       </div>
+
+      {/* Main content area */}
+      <main className={`text-[#0f5a56] ${isNotebookView ? 'p-0 overflow-hidden h-[calc(100vh-14rem)]' : 'px-10 pb-6 overflow-y-auto'}`} style={{ backgroundColor: isNotebookView ? '#ffffff' : '#F2F2F2' }}>
+        {children}
+      </main>
     </div>
   );
 }
