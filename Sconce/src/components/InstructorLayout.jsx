@@ -53,7 +53,15 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
           <p className="text-white/70 text-sm">Here's what's on your plate today.</p>
         </div>
         
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => (window.location.hash = '#/dashboard/instructor')}
+            className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#F29F05] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
+          >
+            <span className="text-2xl">🏠</span>
+            <span>Dashboard</span>
+          </button>
+          
           <button
             onClick={() => (window.location.hash = '#/dashboard/instructor/notebooks')}
             className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#58ACA9] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
