@@ -3,6 +3,9 @@
  * Connects Sconce frontend to ASP.NET Core backend
  */
 
+// Import Supabase for Zoom functions
+import { supabase } from './supabase.js';
+
 // Backend API base URL
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://sconce.runasp.net';
 
@@ -367,47 +370,133 @@ export const getStudentApplicationById = async (id) => {
 /**
  * Get Zoom OAuth authorization URL
  * Redirects instructor to Zoom to connect their account
- * GET /api/zoom/authorize
- * @returns {string} Authorization URL to redirect user to
+ * @returns {Promise<string>} Authorization URL to redirect user to
  */
-export const getZoomAuthUrl = () => {
-  return `${API_BASE_URL}/api/zoom/authorize`;
+export const getZoomAuthUrl = async () => {
+  const instructorId = getCurrentUser()?.id;
+  if (!instructorId) {
+    throw new Error("Instructor ID not found");
+  }
+  
+  const clientId = import.meta.env.VITE_ZOOM_CLIENT_ID;
+  const redirectUri = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/zoom-oauth-callback`;
+  const state = generateRandomState();
+  
+  // Store state in localStorage for CSRF validation
+  localStorage.setItem('zoom_oauth_state', state);
+  localStorage.setItem('zoom_instructor_id', instructorId);
+  
+  return `https://zoom.us/oauth/authorize?` +
+         `response_type=code&` +
+         `client_id=${clientId}&` +
+         `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+         `state=${state}&` +
+         `instructor_id=${instructorId}`;
 };
 
 /**
  * Check if instructor has connected their Zoom account
- * GET /api/zoom/status
  * @returns {Promise<object>} { connected: boolean, email: string }
  */
 export const getZoomConnectionStatus = async () => {
-  return await apiRequest('/api/zoom/status', {
-    method: 'GET',
-  });
+  try {
+    const { data, error } = await supabase
+      .functions
+      .invoke('zoom-meetings', {
+        body: {
+          action: 'status',
+          instructorId: getCurrentUser()?.id,
+        }
+      });
+    
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error checking Zoom connection:', error);
+    return { connected: false };
+  }
 };
 
 /**
  * Disconnect instructor's Zoom account
- * DELETE /api/zoom/disconnect
- * @returns {Promise<void>}
  */
 export const disconnectZoom = async () => {
-  return await apiRequest('/api/zoom/disconnect', {
-    method: 'DELETE',
-  });
+  try {
+    const { data, error } = await supabase
+      .functions
+      .invoke('zoom-meetings', {
+        body: {
+          action: 'disconnect',
+          instructorId: getCurrentUser()?.id,
+        }
+      });
+    
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error disconnecting Zoom:', error);
+    throw error;
+  }
 };
 
 /**
  * Create Zoom meeting using instructor's connected account
- * POST /api/zoom/create-meeting
  * @param {object} meetingData - Meeting configuration
  * @returns {Promise<object>} Meeting details (join URL, ID, password, etc.)
  */
 export const createZoomMeeting = async (meetingData) => {
-  return await apiRequest('/api/zoom/create-meeting', {
-    method: 'POST',
-    body: JSON.stringify(meetingData),
-  });
+  try {
+    const instructorId = getCurrentUser()?.id;
+    
+    const { data, error } = await supabase
+      .functions
+      .invoke('zoom-meetings', {
+        body: {
+          action: 'create',
+          instructorId,
+          ...meetingData,
+        }
+      });
+    
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error creating Zoom meeting:', error);
+    throw error;
+  }
 };
+
+/**
+ * Delete/cancel a Zoom meeting
+ * @param {string} meetingId - Meeting ID from Sconce database
+ */
+export const deleteZoomMeeting = async (meetingId) => {
+  try {
+    const { data, error } = await supabase
+      .functions
+      .invoke('zoom-meetings', {
+        body: {
+          action: 'delete',
+          instructorId: getCurrentUser()?.id,
+          meetingId,
+        }
+      });
+    
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error('Error deleting Zoom meeting:', error);
+    throw error;
+  }
+};
+
+/**
+ * Helper to generate random state for OAuth CSRF protection
+ */
+function generateRandomState() {
+  return Math.random().toString(36).substring(2, 15) + 
+         Math.random().toString(36).substring(2, 15);
+}
 
 // ==================== UTILITY ENDPOINTS ====================
 

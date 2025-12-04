@@ -50,25 +50,19 @@ export default function InstructorHomeDashboard() {
   })), [courses]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-0 h-full">
       {/* Main layout: Courses on left, Timetable on right */}
-      <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}>
+      <div className="grid gap-0" style={{ gridTemplateColumns: '2fr 1fr', height: '100%' }}>
         {/* LEFT SIDE: My Courses */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#0f5a56]\">My Courses</h2>
-            <button 
-              className="text-sm text-[#58ACA9] hover:underline font-medium"
-              onClick={()=> (window.location.hash = '#/dashboard/instructor/courses')}
-            >
-              View All →
-            </button>
+        <div className="space-y-4 pr-6 overflow-y-auto">
+          <div>
+            <h2 className="text-lg font-bold text-[#0f5a56]">My Courses</h2>
           </div>
           
           {courseOverview.length === 0 ? (
             <div className="text-sm text-[#0f5a56]/70">No courses assigned yet.</div>
           ) : (
-            <div className="grid md:grid-cols-2 gap-4 max-h-[500px] overflow-y-auto pr-2">
+            <div className="grid md:grid-cols-2 gap-4 pb-4">
               {courseOverview.slice(0, 6).map(co => (
                 <div 
                   key={co.id} 
@@ -95,7 +89,7 @@ export default function InstructorHomeDashboard() {
         </div>
 
         {/* RIGHT SIDE: Timetable (Half width) */}
-        <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30">
+        <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30 flex flex-col border-l-4" style={{ borderLeftColor: '#374B4B' }}>
           <div className="flex items-start justify-between mb-3">
             <div>
               <div className="text-lg font-semibold">Timetable</div>
@@ -108,7 +102,7 @@ export default function InstructorHomeDashboard() {
           </div>
 
           {/* Hour rows - Compact version */}
-          <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
+          <div className="space-y-2 flex-1 overflow-y-auto pr-1">
             {['08:00','09:00','10:00','11:00','12:00'].map((hour, idx) => (
               <div key={hour} className="">
                 <div className="text-[11px] mb-1 font-medium">{hour.replace(':00','')}.0 a.m</div>

@@ -13,7 +13,7 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
   ];
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden" style={{ backgroundImage: unifiedBackground, backgroundColor: '#034242' }}>
+    <div className="relative min-h-screen w-full overflow-hidden flex flex-col" style={{ backgroundImage: unifiedBackground, backgroundColor: '#034242' }}>
       {/* Header: replicate main page utility bar and navigation bar */}
       <div className="sticky top-0 left-0 right-0 z-40">
         {/* Utility top bar */}
@@ -47,7 +47,7 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
       </div>
 
       {/* Action Buttons Row with Welcome Message */}
-      <div className="px-10 py-6 flex items-center justify-between bg-[#F2F2F2]">
+      <div className="px-10 py-6 flex items-center justify-between bg-[#B6C8C8]">
         <div>
           <h1 className="text-2xl font-bold text-[#034242]">Welcome Back, Instructor!</h1>
           <p className="text-[#0f5a56]/70 text-sm">Here's what's on your plate today.</p>
@@ -84,7 +84,7 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
       </div>
 
       {/* Main content area */}
-      <main className={`text-[#0f5a56] ${isNotebookView ? 'p-0 overflow-hidden h-[calc(100vh-14rem)]' : 'px-10 py-6 overflow-y-auto'}`} style={{ backgroundColor: '#F2F2F2' }}>
+      <main className={`text-[#0f5a56] flex-1 ${isNotebookView ? 'p-0 overflow-hidden' : 'px-10 py-6 overflow-y-auto'}`} style={{ backgroundColor: '#F2F2F2' }}>
         {children}
       </main>
     </div>
