@@ -10,7 +10,23 @@ const supabase = createClient(supabaseUrl, supabaseKey);
  * Handle Zoom OAuth callback
  * GET /functions/v1/zoom-oauth-callback?code=xxx&state=yyy
  */
+
+// CORS headers
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "apikey, authorization, content-type, x-client-info, prefer",
+};
+
 Deno.serve(async (req) => {
+  // Handle CORS preflight
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders,
+    });
+  }
+
   try {
     // Parse query parameters
     const url = new URL(req.url);
@@ -21,7 +37,7 @@ Deno.serve(async (req) => {
     if (!code || !state || !instructorId) {
       return new Response(
         JSON.stringify({ error: "Missing required parameters" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
@@ -38,6 +54,7 @@ Deno.serve(async (req) => {
       status: 302,
       headers: {
         Location: `${frontendUrl}/#/dashboard/instructor?zoom=connected&email=${encodeURIComponent(result.email)}`,
+        ...corsHeaders,
       },
     });
   } catch (error) {
@@ -48,7 +65,8 @@ Deno.serve(async (req) => {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: `${frontendUrl}/#/dashboard/instructor?zoom=error&message=${encodeURIComponent(error.message)}`,
+        Location: `${frontendUrl}/#/dashboard/instructor?zoom=error&message=${encodeURIComponent(error instanceof Error ? error.message : String(error))}`,
+        ...corsHeaders,
       },
     });
   }

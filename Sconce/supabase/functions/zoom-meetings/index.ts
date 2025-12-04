@@ -10,14 +10,31 @@ const supabase = createClient(supabaseUrl, supabaseKey);
  * Zoom Meeting Management API
  * Handles: create meeting, delete meeting, get status
  */
+
+// CORS headers for preflight and regular requests
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "apikey, authorization, content-type, x-client-info, prefer",
+  "Access-Control-Max-Age": "86400",
+};
+
 Deno.serve(async (req) => {
+  // Handle CORS preflight request
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders,
+    });
+  }
+
   try {
     // Get auth header
     const authHeader = req.headers.get("authorization");
     if (!authHeader) {
       return new Response(
         JSON.stringify({ error: "Missing authorization header" }),
-        { status: 401, headers: { "Content-Type": "application/json" } }
+        { status: 401, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
@@ -29,16 +46,15 @@ Deno.serve(async (req) => {
     if (!instructorId) {
       return new Response(
         JSON.stringify({ error: "Missing instructor ID" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
 
     const method = req.method;
-    const url = new URL(req.url);
-    const pathname = url.pathname;
+    const action = body.action; // Route based on action in body, not pathname
 
-    // Route handlers
-    if (method === "POST" && pathname.includes("create")) {
+    // Route handlers based on action
+    if (action === "create") {
       // Create meeting
       const result = await zoomUtils.createZoomMeeting(instructorId, {
         topic: body.topic,
@@ -57,15 +73,15 @@ Deno.serve(async (req) => {
 
       return new Response(JSON.stringify(result), {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
-    } else if (method === "DELETE" && pathname.includes("delete")) {
+    } else if (action === "delete") {
       // Delete meeting
       const meetingId = body.meetingId;
       if (!meetingId) {
         return new Response(
           JSON.stringify({ error: "Missing meeting ID" }),
-          { status: 400, headers: { "Content-Type": "application/json" } }
+          { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
         );
       }
 
@@ -73,28 +89,28 @@ Deno.serve(async (req) => {
 
       return new Response(JSON.stringify(result), {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
-    } else if (method === "GET" && pathname.includes("status")) {
+    } else if (action === "status") {
       // Get connection status
       const result = await zoomUtils.getZoomStatus(instructorId);
 
       return new Response(JSON.stringify(result), {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
-    } else if (method === "DELETE" && pathname.includes("disconnect")) {
+    } else if (action === "disconnect") {
       // Disconnect Zoom account
       const result = await zoomUtils.disconnectZoom(instructorId);
 
       return new Response(JSON.stringify(result), {
         status: 200,
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...corsHeaders },
       });
     } else {
       return new Response(
-        JSON.stringify({ error: "Invalid endpoint" }),
-        { status: 404, headers: { "Content-Type": "application/json" } }
+        JSON.stringify({ error: `Unknown action: ${action}` }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
       );
     }
   } catch (error) {
@@ -103,9 +119,9 @@ Deno.serve(async (req) => {
     return new Response(
       JSON.stringify({
         error: "Internal server error",
-        message: error.message,
+        message: error instanceof Error ? error.message : String(error),
       }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 });

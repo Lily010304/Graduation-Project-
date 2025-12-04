@@ -373,7 +373,9 @@ export const getStudentApplicationById = async (id) => {
  * @returns {Promise<string>} Authorization URL to redirect user to
  */
 export const getZoomAuthUrl = async () => {
-  const instructorId = getCurrentUser()?.id;
+  const { data: { user } } = await supabase.auth.getUser();
+  const instructorId = user?.id || getCurrentUser()?.id;
+  
   if (!instructorId) {
     throw new Error("Instructor ID not found");
   }
@@ -400,16 +402,27 @@ export const getZoomAuthUrl = async () => {
  */
 export const getZoomConnectionStatus = async () => {
   try {
+    // Get user ID from Supabase session
+    const { data: { user } } = await supabase.auth.getUser();
+    const instructorId = user?.id || getCurrentUser()?.id;
+    
+    console.log('Checking Zoom status for instructor:', instructorId);
+    
     const { data, error } = await supabase
       .functions
       .invoke('zoom-meetings', {
         body: {
           action: 'status',
-          instructorId: getCurrentUser()?.id,
+          instructorId,
         }
       });
     
-    if (error) throw error;
+    if (error) {
+      console.error('Supabase function error:', error);
+      throw error;
+    }
+    
+    console.log('Zoom status response:', data);
     return data;
   } catch (error) {
     console.error('Error checking Zoom connection:', error);
@@ -422,12 +435,15 @@ export const getZoomConnectionStatus = async () => {
  */
 export const disconnectZoom = async () => {
   try {
+    const { data: { user } } = await supabase.auth.getUser();
+    const instructorId = user?.id || getCurrentUser()?.id;
+    
     const { data, error } = await supabase
       .functions
       .invoke('zoom-meetings', {
         body: {
           action: 'disconnect',
-          instructorId: getCurrentUser()?.id,
+          instructorId,
         }
       });
     
@@ -446,7 +462,8 @@ export const disconnectZoom = async () => {
  */
 export const createZoomMeeting = async (meetingData) => {
   try {
-    const instructorId = getCurrentUser()?.id;
+    const { data: { user } } = await supabase.auth.getUser();
+    const instructorId = user?.id || getCurrentUser()?.id;
     
     const { data, error } = await supabase
       .functions
@@ -472,12 +489,15 @@ export const createZoomMeeting = async (meetingData) => {
  */
 export const deleteZoomMeeting = async (meetingId) => {
   try {
+    const { data: { user } } = await supabase.auth.getUser();
+    const instructorId = user?.id || getCurrentUser()?.id;
+    
     const { data, error } = await supabase
       .functions
       .invoke('zoom-meetings', {
         body: {
           action: 'delete',
-          instructorId: getCurrentUser()?.id,
+          instructorId,
           meetingId,
         }
       });
