@@ -156,15 +156,6 @@ export default function InstructorHomeDashboard() {
           <button className="mt-3 text-xs underline hover:no-underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/schedule')}>View Full Calendar</button>
         </div>
       </div>
-
-      {/* Recent Submissions */}
-      <div className="rounded-2xl bg-[#58ACA9] text-white p-4 border border-white/30 max-w-2xl">
-        <div className="font-semibold mb-2">Recent Student Submissions</div>
-        <ul className="text-sm space-y-1">
-          {submissions.map(s => <li key={s.id}>{s.label}</li>)}
-        </ul>
-        <button className="mt-3 text-sm underline" onClick={()=> (window.location.hash = '#/dashboard/instructor/grading')}>View All Submissions</button>
-      </div>
     </div>
   );
 }

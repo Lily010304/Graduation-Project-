@@ -54,13 +54,16 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
         </div>
         
         <div className="flex items-center gap-4">
-          <button
-            onClick={() => (window.location.hash = '#/dashboard/instructor')}
-            className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#F29F05] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
-          >
-            <span className="text-2xl">🏠</span>
-            <span>Dashboard</span>
-          </button>
+          {/* Dashboard button only shows when NOT on home dashboard */}
+          {active !== 'home' && (
+            <button
+              onClick={() => (window.location.hash = '#/dashboard/instructor')}
+              className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#F29F05] text-white font-semibold text-base shadow-lg hover:shadow-xl hover:brightness-110 transition-all duration-300 active:scale-95"
+            >
+              <span className="text-2xl">🏠</span>
+              <span>Dashboard</span>
+            </button>
+          )}
           
           <button
             onClick={() => (window.location.hash = '#/dashboard/instructor/notebooks')}
