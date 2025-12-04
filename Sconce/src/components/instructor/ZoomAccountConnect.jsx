@@ -24,9 +24,14 @@ export default function ZoomAccountConnect({ onClose, onConnected }) {
     }
   };
 
-  const handleConnect = () => {
-    // Redirect to backend OAuth flow
-    window.location.href = getZoomAuthUrl();
+  const handleConnect = async () => {
+    try {
+      // Get the OAuth URL and redirect
+      const authUrl = await getZoomAuthUrl();
+      window.location.href = authUrl;
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const handleDisconnect = async () => {
