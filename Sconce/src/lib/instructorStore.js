@@ -5,7 +5,7 @@
 // Day: { id, number, title, items: ContentItem[] }
 // ContentItem: { id, type: 'lecture'|'reading'|'assignment'|'quiz'|'resource', title, description?, durationMins?, url?, hidden?: boolean }
 
-const STORAGE_KEY = 'sconce.instructor.courses.v1';
+const STORAGE_KEY = 'sconce.instructor.courses.v2';
 
 function uid(prefix = 'id') {
 	return `${prefix}_${Math.random().toString(36).slice(2, 8)}${Date.now().toString(36).slice(-4)}`;
@@ -31,44 +31,145 @@ function saveRaw(courses) {
 	}
 }
 
-// Seed with a sample course if none exist
+// Seed with sample courses if none exist
 function ensureSeed() {
 	const courses = loadRaw();
 	if (courses.length) return courses;
-		const cId = uid('course');
+	
 	const currentInstructorId = getCurrentInstructorId();
-		const fmt = (d) => d.toISOString().slice(0,10);
-		const today = new Date();
-		const nextWeek = new Date(today.getTime() + 7*24*60*60*1000);
-	const w1 = { id: uid('week'), number: 1, title: 'Getting Started', startDate: fmt(today), items: [], days: [] };
-	const w2 = { id: uid('week'), number: 2, title: 'Core Concepts', startDate: fmt(nextWeek), items: [], days: [] };
-		const d1 = { id: uid('day'), number: 1, title: 'Introduction', items: [
-			{ id: uid('item'), type: 'lecture', title: 'Welcome and Syllabus Overview', description: 'Course walkthrough and expectations', durationMins: 20, hidden: false },
-			{ id: uid('item'), type: 'reading', title: 'Read: Course Handbook', url: '#', description: 'Policies and resources', hidden: false }
-		]};
-		const d2 = { id: uid('day'), number: 2, title: 'Tools Setup', items: [
-			{ id: uid('item'), type: 'resource', title: 'Download Starter Files', url: '#', hidden: false },
-			{ id: uid('item'), type: 'assignment', title: 'Setup Checklist', description: 'Verify your environment', durationMins: 30, hidden: false }
-		]};
-		// Also seed week-level items (no days) for the new structure
-		w1.items.push(
-			{ id: uid('item'), type: 'lecture', title: 'Intro Lecture (Week-level)', description: 'Overview without days', durationMins: 15, hidden: false },
-		);
-		w2.items.push(
-			{ id: uid('item'), type: 'reading', title: 'Read: Chapter 1', url: '#', hidden: false },
-		);
-		w1.days.push(d1, d2);
-	const seedCourse = {
-		id: cId,
-		title: 'Sample Course',
-		level: 'Level 1',
-		description: 'An example structured course with weeks and days',
-		published: false,
+	const fmt = (d) => d.toISOString().slice(0,10);
+	const today = new Date();
+	const nextWeek = new Date(today.getTime() + 7*24*60*60*1000);
+	
+	// Create 6 sample courses matching the dashboard layout
+	const sampleCourses = [
+		{
+			id: uid('course'),
+			title: 'Sample Course',
+			level: 'Level 1',
+			description: 'An example structured course with weeks and days',
+			published: false,
 			instructors: [currentInstructorId],
-		weeks: [w1, w2]
-	};
-	saveRaw([seedCourse]);
-	return [seedCourse];
+			studentsCount: 30,
+			avgGrade: 0,
+			weeks: [
+				{ 
+					id: uid('week'), 
+					number: 1, 
+					title: 'Getting Started', 
+					startDate: fmt(today), 
+					items: [
+						{ id: uid('item'), type: 'lecture', title: 'Welcome and Syllabus Overview', description: 'Course walkthrough', durationMins: 20, hidden: false },
+						{ id: uid('item'), type: 'reading', title: 'Read: Course Handbook', url: '#', description: 'Policies and resources', hidden: false }
+					], 
+					days: [] 
+				}
+			]
+		},
+		{
+			id: uid('course'),
+			title: 'Sample Course',
+			level: 'Level 1',
+			description: 'An example structured course with weeks and days',
+			published: false,
+			instructors: [currentInstructorId],
+			studentsCount: 30,
+			avgGrade: 0,
+			weeks: [
+				{ 
+					id: uid('week'), 
+					number: 1, 
+					title: 'Introduction', 
+					startDate: fmt(today), 
+					items: [], 
+					days: [] 
+				}
+			]
+		},
+		{
+			id: uid('course'),
+			title: 'Sample Course',
+			level: 'Level 1',
+			description: 'An example structured course with weeks and days',
+			published: false,
+			instructors: [currentInstructorId],
+			studentsCount: 30,
+			avgGrade: 0,
+			weeks: [
+				{ 
+					id: uid('week'), 
+					number: 1, 
+					title: 'Foundations', 
+					startDate: fmt(today), 
+					items: [], 
+					days: [] 
+				}
+			]
+		},
+		{
+			id: uid('course'),
+			title: 'Sample Course',
+			level: 'Level 1',
+			description: 'An example structured course with weeks and days',
+			published: false,
+			instructors: [currentInstructorId],
+			studentsCount: 30,
+			avgGrade: 0,
+			weeks: [
+				{ 
+					id: uid('week'), 
+					number: 1, 
+					title: 'Core Topics', 
+					startDate: fmt(nextWeek), 
+					items: [], 
+					days: [] 
+				}
+			]
+		},
+		{
+			id: uid('course'),
+			title: 'Sample Course',
+			level: 'Level 1',
+			description: 'An example structured course with weeks and days',
+			published: false,
+			instructors: [currentInstructorId],
+			studentsCount: 30,
+			avgGrade: 0,
+			weeks: [
+				{ 
+					id: uid('week'), 
+					number: 1, 
+					title: 'Advanced Topics', 
+					startDate: fmt(nextWeek), 
+					items: [], 
+					days: [] 
+				}
+			]
+		},
+		{
+			id: uid('course'),
+			title: 'Sample Course',
+			level: 'Level 1',
+			description: 'An example structured course with weeks and days',
+			published: false,
+			instructors: [currentInstructorId],
+			studentsCount: 30,
+			avgGrade: 0,
+			weeks: [
+				{ 
+					id: uid('week'), 
+					number: 1, 
+					title: 'Final Project', 
+					startDate: fmt(nextWeek), 
+					items: [], 
+					days: [] 
+				}
+			]
+		}
+	];
+	
+	saveRaw(sampleCourses);
+	return sampleCourses;
 }
 
 export const LEVELS = ['Level 1', 'Level 2', 'Level 3'];
