@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Video, Calendar, Clock, Users, Lock, AlertCircle } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+import { createZoomMeeting, getZoomConnectionStatus } from '../../lib/api';
+import ZoomAccountConnect from './ZoomAccountConnect';
 
 export default function ZoomMeetingDialog({ open, onClose, onSave, courseTitle }) {
   const [meetingData, setMeetingData] = useState({
@@ -18,37 +19,62 @@ export default function ZoomMeetingDialog({ open, onClose, onSave, courseTitle }
   const [showZoomSetup, setShowZoomSetup] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState(null);
+  const [showConnectDialog, setShowConnectDialog] = useState(false);
+  const [zoomConnected, setZoomConnected] = useState(false);
+  const [checkingConnection, setCheckingConnection] = useState(true);
+
+  useEffect(() => {
+    if (open) {
+      checkZoomConnection();
+    }
+  }, [open]);
+
+  const checkZoomConnection = async () => {
+    try {
+      const status = await getZoomConnectionStatus();
+      setZoomConnected(status.connected);
+      if (!status.connected) {
+        setShowConnectDialog(true);
+      }
+    } catch (err) {
+      console.error('Error checking Zoom connection:', err);
+      setZoomConnected(false);
+      setShowConnectDialog(true);
+    } finally {
+      setCheckingConnection(false);
+    }
+  };
 
   if (!open) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check connection before creating
+    if (!zoomConnected) {
+      setShowConnectDialog(true);
+      return;
+    }
+    
     setIsCreating(true);
     setError(null);
     
     try {
-      // Call Supabase Edge Function to create Zoom meeting
-      const { data, error: functionError } = await supabase.functions.invoke('create-zoom-meeting', {
-        body: {
-          topic: meetingData.topic,
-          startTime: meetingData.startTime,
-          duration: meetingData.duration,
-          timezone: meetingData.timezone,
-          password: meetingData.password || undefined,
-          waitingRoom: meetingData.waitingRoom,
-          joinBeforeHost: meetingData.joinBeforeHost,
-          muteUponEntry: meetingData.muteUponEntry,
-          description: meetingData.description || undefined,
-        },
+      // Call backend API to create Zoom meeting using instructor's account
+      const data = await createZoomMeeting({
+        topic: meetingData.topic,
+        startTime: meetingData.startTime,
+        duration: meetingData.duration,
+        timezone: meetingData.timezone,
+        password: meetingData.password || undefined,
+        waitingRoom: meetingData.waitingRoom,
+        joinBeforeHost: meetingData.joinBeforeHost,
+        muteUponEntry: meetingData.muteUponEntry,
+        description: meetingData.description || undefined,
       });
 
-      if (functionError) {
-        console.error('Zoom function error:', functionError);
-        throw new Error(functionError.message || 'Failed to create Zoom meeting');
-      }
-
-      if (!data?.success) {
-        throw new Error(data?.error || 'Failed to create Zoom meeting');
+      if (!data?.meeting) {
+        throw new Error('Failed to create Zoom meeting');
       }
 
       console.log('Zoom meeting created successfully:', data.meeting);
@@ -83,6 +109,33 @@ export default function ZoomMeetingDialog({ open, onClose, onSave, courseTitle }
     }
   };
 
+  // Show connection dialog if not connected
+  if (showConnectDialog) {
+    return (
+      <ZoomAccountConnect
+        onClose={() => {
+          setShowConnectDialog(false);
+          onClose();
+        }}
+        onConnected={() => {
+          setZoomConnected(true);
+          setShowConnectDialog(false);
+        }}
+      />
+    );
+  }
+
+  // Show loading state while checking connection
+  if (checkingConnection) {
+    return (
+      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-6">
+          <div className="text-center">Checking Zoom connection...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden">
@@ -100,9 +153,7 @@ export default function ZoomMeetingDialog({ open, onClose, onSave, courseTitle }
           >
             <X className="w-6 h-6 text-gray-500" />
           </button>
-        </div>
-
-        <div className="p-6 overflow-y-auto max-h-[calc(85vh-140px)]">
+        </div>        <div className="p-6 overflow-y-auto max-h-[calc(85vh-140px)]">
           {/* Zoom Setup Notice */}
           <div className="mb-6 bg-blue-50 border border-blue-200 rounded-xl p-4">
             <div className="flex items-start gap-3">

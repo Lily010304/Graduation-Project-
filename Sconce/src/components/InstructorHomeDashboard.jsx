@@ -54,9 +54,9 @@ export default function InstructorHomeDashboard() {
       {/* Main layout: Courses on left, Timetable on right */}
       <div className="grid gap-6" style={{ gridTemplateColumns: '2fr 1fr' }}>
         {/* LEFT SIDE: My Courses */}
-        <div className="rounded-2xl bg-white p-5 border border-[#58ACA9]/30 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-bold text-[#0f5a56]">My Courses</h2>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-[#0f5a56]\">My Courses</h2>
             <button 
               className="text-sm text-[#58ACA9] hover:underline font-medium"
               onClick={()=> (window.location.hash = '#/dashboard/instructor/courses')}
@@ -68,31 +68,26 @@ export default function InstructorHomeDashboard() {
           {courseOverview.length === 0 ? (
             <div className="text-sm text-[#0f5a56]/70">No courses assigned yet.</div>
           ) : (
-            <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+            <div className="grid md:grid-cols-2 gap-4 max-h-[500px] overflow-y-auto pr-2">
               {courseOverview.slice(0, 6).map(co => (
                 <div 
                   key={co.id} 
-                  className="rounded-xl border border-[#58ACA9]/20 p-4 bg-gradient-to-br from-[#58ACA9]/5 to-[#58ACA9]/10 hover:shadow-md transition-shadow cursor-pointer"
+                  className="rounded-2xl p-4 bg-[#58ACA9] text-white shadow-md hover:shadow-lg transition-shadow cursor-pointer"
                   onClick={()=> (window.location.hash = `#/dashboard/instructor/course/${co.id}`)}
                 >
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-[#0f5a56] text-base mb-1">{co.title}</h3>
-                      <p className="text-xs text-[#0f5a56]/70">{co.level}</p>
-                    </div>
-                    <div className="text-xs bg-[#58ACA9] text-white px-3 py-1 rounded-full">
-                      {co.students}/30
-                    </div>
+                  <div className="mb-3">
+                    <h3 className="font-semibold text-base mb-1">{co.title}</h3>
+                    <p className="text-xs text-white/80">{co.level}</p>
                   </div>
                   
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#58ACA9]/20">
-                    <div className="text-xs text-[#0f5a56]/70">
-                      Avg. Grade: <span className="font-semibold text-[#0f5a56]">{co.avg}%</span>
-                    </div>
-                    <button className="text-xs text-[#58ACA9] hover:underline font-medium">
-                      Manage →
-                    </button>
+                  <div className="space-y-2 mb-3 pb-3 border-b border-white/20">
+                    <div className="text-xs text-white/90">Students: {co.students}/30</div>
+                    <div className="text-xs text-white/90">Avg Grade: {co.avg}%</div>
                   </div>
+                  
+                  <button className="w-full px-4 py-2 bg-[#F29F05] text-white rounded-full font-semibold text-sm hover:brightness-110 active:scale-95 transition shadow-md">
+                    Manage Course
+                  </button>
                 </div>
               ))}
             </div>

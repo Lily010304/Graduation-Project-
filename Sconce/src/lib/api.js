@@ -362,6 +362,53 @@ export const getStudentApplicationById = async (id) => {
   });
 };
 
+// ==================== ZOOM INTEGRATION ENDPOINTS ====================
+
+/**
+ * Get Zoom OAuth authorization URL
+ * Redirects instructor to Zoom to connect their account
+ * GET /api/zoom/authorize
+ * @returns {string} Authorization URL to redirect user to
+ */
+export const getZoomAuthUrl = () => {
+  return `${API_BASE_URL}/api/zoom/authorize`;
+};
+
+/**
+ * Check if instructor has connected their Zoom account
+ * GET /api/zoom/status
+ * @returns {Promise<object>} { connected: boolean, email: string }
+ */
+export const getZoomConnectionStatus = async () => {
+  return await apiRequest('/api/zoom/status', {
+    method: 'GET',
+  });
+};
+
+/**
+ * Disconnect instructor's Zoom account
+ * DELETE /api/zoom/disconnect
+ * @returns {Promise<void>}
+ */
+export const disconnectZoom = async () => {
+  return await apiRequest('/api/zoom/disconnect', {
+    method: 'DELETE',
+  });
+};
+
+/**
+ * Create Zoom meeting using instructor's connected account
+ * POST /api/zoom/create-meeting
+ * @param {object} meetingData - Meeting configuration
+ * @returns {Promise<object>} Meeting details (join URL, ID, password, etc.)
+ */
+export const createZoomMeeting = async (meetingData) => {
+  return await apiRequest('/api/zoom/create-meeting', {
+    method: 'POST',
+    body: JSON.stringify(meetingData),
+  });
+};
+
 // ==================== UTILITY ENDPOINTS ====================
 
 /**

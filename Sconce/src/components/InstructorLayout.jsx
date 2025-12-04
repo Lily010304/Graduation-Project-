@@ -47,10 +47,10 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
       </div>
 
       {/* Action Buttons Row with Welcome Message */}
-      <div className="px-10 py-4 flex items-center justify-between">
+      <div className="px-10 py-6 flex items-center justify-between bg-[#F2F2F2]">
         <div>
-          <h1 className="text-2xl font-bold text-white">Welcome Back, Instructor!</h1>
-          <p className="text-white/70 text-sm">Here's what's on your plate today.</p>
+          <h1 className="text-2xl font-bold text-[#034242]">Welcome Back, Instructor!</h1>
+          <p className="text-[#0f5a56]/70 text-sm">Here's what's on your plate today.</p>
         </div>
         
         <div className="flex items-center gap-4">
@@ -84,7 +84,7 @@ export default function InstructorLayout({ children, active, isNotebookView = fa
       </div>
 
       {/* Main content area */}
-      <main className={`text-[#0f5a56] ${isNotebookView ? 'p-0 overflow-hidden h-[calc(100vh-14rem)]' : 'px-10 pb-6 overflow-y-auto'}`} style={{ backgroundColor: isNotebookView ? '#ffffff' : '#F2F2F2' }}>
+      <main className={`text-[#0f5a56] ${isNotebookView ? 'p-0 overflow-hidden h-[calc(100vh-14rem)]' : 'px-10 py-6 overflow-y-auto'}`} style={{ backgroundColor: '#F2F2F2' }}>
         {children}
       </main>
     </div>
