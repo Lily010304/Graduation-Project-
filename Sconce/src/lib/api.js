@@ -384,16 +384,27 @@ export const getZoomAuthUrl = async () => {
   const redirectUri = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/zoom-oauth-callback`;
   const state = generateRandomState();
   
-  // Store state in localStorage for CSRF validation
-  localStorage.setItem('zoom_oauth_state', state);
-  localStorage.setItem('zoom_instructor_id', instructorId);
+  // Create temporary session to store mapping of state -> instructor_id
+  // The callback function will retrieve the instructor_id using the state parameter
+  const { error } = await supabase
+    .from('zoom_oauth_sessions')
+    .insert({
+      state,
+      instructor_id: instructorId,
+      expires_at: new Date(Date.now() + 10 * 60 * 1000).toISOString() // 10 minutes
+    });
   
+  if (error) {
+    console.error('Failed to create OAuth session:', error);
+    throw new Error("Failed to initiate Zoom OAuth session");
+  }
+  
+  // Return authorization URL
   return `https://zoom.us/oauth/authorize?` +
          `response_type=code&` +
          `client_id=${clientId}&` +
          `redirect_uri=${encodeURIComponent(redirectUri)}&` +
-         `state=${state}&` +
-         `instructor_id=${instructorId}`;
+         `state=${state}`;
 };
 
 /**
