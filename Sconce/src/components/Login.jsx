@@ -97,7 +97,30 @@ export default function Login() {
       }
     } catch (err) {
       console.error('Login error:', err);
-      setError(err.message || 'Login failed. Please check your credentials.');
+      
+      // Parse error message from various formats
+      let errorMessage = 'Login failed. Please check your credentials.';
+      
+      if (err.message) {
+        if (typeof err.message === 'string') {
+          errorMessage = err.message;
+        } else if (err.message.message) {
+          errorMessage = err.message.message;
+        }
+      } else if (typeof err === 'string') {
+        errorMessage = err;
+      } else if (err && typeof err === 'object' && err.error) {
+        errorMessage = err.error;
+      }
+      
+      // Check if it's an email verification error
+      if (errorMessage.toLowerCase().includes('email') && errorMessage.toLowerCase().includes('confirm')) {
+        errorMessage = 'Please verify your email address first. Check your inbox for the verification link.';
+      } else if (errorMessage.toLowerCase().includes('not confirmed') || errorMessage.toLowerCase().includes('confirm')) {
+        errorMessage = 'Please verify your email address first. Check your inbox for the verification link.';
+      }
+      
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }

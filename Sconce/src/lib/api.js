@@ -47,7 +47,21 @@ const apiRequest = async (endpoint, options = {}) => {
     }
 
     if (!response.ok) {
-      throw new Error(data?.message || data || `HTTP ${response.status}: ${response.statusText}`);
+      // Extract error message from various response formats
+      let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+      
+      if (data?.message) {
+        errorMessage = data.message;
+      } else if (data?.error) {
+        errorMessage = data.error;
+      } else if (typeof data === 'string' && data.trim()) {
+        errorMessage = data;
+      }
+      
+      const error = new Error(errorMessage);
+      error.status = response.status;
+      error.data = data;
+      throw error;
     }
 
     return data;
@@ -343,12 +357,15 @@ export const getInstructorApplicationById = async (id) => {
 
 /**
  * Get student applications
- * GET /api/Admin/Student/Applications
+ * GET /api/Admin/Student/Applications?status=2
  * @param {number} status - Application status filter
  * @returns {Promise<Array>}
  */
 export const getStudentApplications = async (status) => {
-  return await apiRequest(`/api/Admin/Student/Applications?status=${status}`, {
+  const endpoint = status !== undefined 
+    ? `/api/Admin/Student/Applications?status=${status}`
+    : `/api/Admin/Student/Applications`;
+  return await apiRequest(endpoint, {
     method: 'GET',
   });
 };
@@ -533,11 +550,14 @@ function generateRandomState() {
 
 /**
  * Delete user (Database utility)
- * POST /api/Db/DeleteUser
+ * POST /api/Db/DeleteUser?email=string
  * @param {string} email 
  * @returns {Promise<void>}
  */
 export const deleteUser = async (email) => {
+  if (!email) {
+    throw new Error('Email is required to delete user');
+  }
   return await apiRequest(`/api/Db/DeleteUser?email=${encodeURIComponent(email)}`, {
     method: 'POST',
   });
