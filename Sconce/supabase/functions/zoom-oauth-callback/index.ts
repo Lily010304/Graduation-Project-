@@ -6,6 +6,7 @@ const zoomClientId = Deno.env.get("ZOOM_CLIENT_ID") || "";
 const zoomClientSecret = Deno.env.get("ZOOM_CLIENT_SECRET") || "";
 
 const supabase = createClient(supabaseUrl, supabaseKey);
+const frontendRedirectUrl = Deno.env.get("FRONTEND_URL");
 
 /**
  * Handle Zoom OAuth callback
@@ -117,7 +118,7 @@ Deno.serve(async (req) => {
     const result = { success: true, email: userData.email };
 
     // Redirect back to frontend with success
-    const frontendUrl = new URL(supabaseUrl).origin;
+    const frontendUrl = frontendRedirectUrl || new URL(supabaseUrl).origin;
     return new Response(null, {
       status: 302,
       headers: {
@@ -129,7 +130,7 @@ Deno.serve(async (req) => {
     console.error("OAuth callback error:", error);
 
     // Redirect back with error
-    const frontendUrl = new URL(supabaseUrl).origin;
+    const frontendUrl = frontendRedirectUrl || new URL(supabaseUrl).origin;
     return new Response(null, {
       status: 302,
       headers: {
