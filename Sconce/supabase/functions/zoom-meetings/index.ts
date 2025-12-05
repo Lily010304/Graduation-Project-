@@ -115,11 +115,22 @@ Deno.serve(async (req) => {
     }
   } catch (error) {
     console.error("Error:", error);
+    console.error("Error stack:", error instanceof Error ? error.stack : "");
+
+    let errorMessage = "Unknown error";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    } else if (typeof error === "string") {
+      errorMessage = error;
+    } else if (error && typeof error === "object") {
+      errorMessage = JSON.stringify(error);
+    }
 
     return new Response(
       JSON.stringify({
         error: "Internal server error",
-        message: error instanceof Error ? error.message : String(error),
+        message: errorMessage,
+        type: typeof error,
       }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );

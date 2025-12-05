@@ -3,7 +3,7 @@ import { X, Video, Calendar, Clock, Users, Lock, AlertCircle } from 'lucide-reac
 import { createZoomMeeting, getZoomConnectionStatus } from '../../lib/api';
 import ZoomAccountConnect from './ZoomAccountConnect';
 
-export default function ZoomMeetingDialog({ open, onClose, onSave, courseTitle }) {
+export default function ZoomMeetingDialog({ open, onClose, onSave, courseId, courseTitle }) {
   const [meetingData, setMeetingData] = useState({
     topic: courseTitle ? `${courseTitle} - Live Session` : 'Live Class Session',
     startTime: '',
@@ -71,6 +71,7 @@ export default function ZoomMeetingDialog({ open, onClose, onSave, courseTitle }
         joinBeforeHost: meetingData.joinBeforeHost,
         muteUponEntry: meetingData.muteUponEntry,
         description: meetingData.description || undefined,
+        courseId: courseId,
       });
 
       if (!data?.meeting) {

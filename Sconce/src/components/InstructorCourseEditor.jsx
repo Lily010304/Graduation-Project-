@@ -152,6 +152,7 @@ export default function InstructorCourseEditor({ courseId }) {
               open={showZoomDialog}
               onClose={() => setShowZoomDialog(false)}
               onSave={handleZoomSave}
+              courseId={course?.id}
               courseTitle={course?.title}
             />
 
